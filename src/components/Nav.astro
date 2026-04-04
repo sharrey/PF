@@ -19,40 +19,36 @@ const pathname = Astro.url.pathname;
           class="relative h-full w-full group-hover:opacity-0 transition-opacity duration-200"
         />
       </div>
-      <span class="font-bold text-sm text-white" style="font-family: 'Pixelify Sans', monospace;">
+      <span class="font-bold text-sm text-white">
         sharriy<span class="text-green-500">.sh</span>
       </span>
     </a>
 
-    <!-- Nav links -->
+    <!-- Nav links + toggles -->
     <nav class="flex items-center gap-1">
-      <a
-        href="/"
-        class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname === '/' ? 'text-green-400' : ''}`}
-      >
+      <a href="/" class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname === '/' ? 'text-green-400' : ''}`}>
         ~/home
       </a>
-      <a
-        href="/about"
-        class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname === '/about' ? 'text-green-400' : ''}`}
-      >
+      <a href="/about" class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname === '/about' ? 'text-green-400' : ''}`}>
         ~/about
       </a>
-      <a
-        href="/blog"
-        class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname.startsWith('/blog') ? 'text-green-400' : ''}`}
-      >
+      <a href="/blog" class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname.startsWith('/blog') ? 'text-green-400' : ''}`}>
         ~/blog
       </a>
-      <a
-        href="https://github.com/Sharriyyy"
-        target="_blank"
-        rel="noopener"
-        class="nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 flex items-center gap-1"
-      >
+      <a href="https://github.com/sharrey" target="_blank" rel="noopener"
+        class="nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 flex items-center gap-1">
         <img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg" class="w-3.5 h-3.5 opacity-60" alt="" />
         ~/github
       </a>
+
+      <!-- Divider -->
+      <span class="text-zinc-800 mx-1 select-none">|</span>
+
+      <!-- Sound toggle -->
+      <button id="sound-toggle" class="nav-toggle" title="Toggle typing sound">[♪ on]</button>
+
+      <!-- Theme toggle -->
+    
     </nav>
 
   </div>

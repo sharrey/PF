@@ -2,21 +2,74 @@
 ---
 
 <footer class="border-t border-zinc-900 mt-auto">
-  <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-    <span class="font-mono text-xs text-zinc-700">
-      <span class="text-green-600">sharriy@devops</span>:<span class="text-blue-600">~</span>$
-      <span class="text-zinc-600 ml-1">uptime <span id="copyright"></span></span>
+  <div class="max-w-5xl mx-auto px-6 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
+
+    <!-- Live system status -->
+    <span class="font-mono text-xs text-zinc-700 flex items-center gap-1 flex-wrap">
+      <span class="text-green-600">sharriy@devops</span><span>:~$</span>
+      <span>uptime</span>
+      <span id="ft-uptime" class="text-zinc-500">…</span>
+      <span class="text-zinc-800">·</span>
+      <span>load</span>
+      <span id="ft-load" class="text-zinc-500">0.00</span>
+      <span class="text-zinc-800">·</span>
+      <span>status:</span>
+      <span id="ft-status" class="text-green-500">shipping ✓</span>
     </span>
+
+    <!-- Links -->
     <div class="flex items-center gap-4 font-mono text-xs text-zinc-700">
       <a href="/" class="hover:text-green-500 transition-colors">home</a>
       <a href="/about" class="hover:text-green-500 transition-colors">about</a>
       <a href="/blog" class="hover:text-green-500 transition-colors">blog</a>
-      <span>// no rights reserved</span>
+      <span class="text-zinc-800">© <span id="ft-year"></span></span>
     </div>
+
   </div>
 </footer>
 
 <script>
-  const el = document.getElementById('copyright');
-  if (el) el.textContent = new Date().getFullYear().toString();
+  // Year
+  const yearEl = document.getElementById('ft-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // Uptime from a fixed launch epoch
+  const LAUNCH = new Date('2024-01-15T00:00:00Z').getTime();
+  const uptimeEl  = document.getElementById('ft-uptime');
+  const loadEl    = document.getElementById('ft-load');
+  const statusEl  = document.getElementById('ft-status');
+
+  const statuses = [
+    { label: 'shipping ✓',        cls: 'text-green-500'  },
+    { label: 'all systems go',    cls: 'text-green-500'  },
+    { label: 'writing Terraform', cls: 'text-blue-400'   },
+    { label: 'deploying… ⏳',     cls: 'text-amber-400'  },
+    { label: 'fixing it rn 🔧',   cls: 'text-amber-400'  },
+    { label: 'breaking prod 💀',  cls: 'text-red-400'    },
+    { label: 'containerizing 🐳', cls: 'text-blue-400'   },
+    { label: 'kubectl apply -f .',cls: 'text-green-500'  },
+  ];
+  let si = 0;
+
+  function tick() {
+    if (!uptimeEl || !loadEl || !statusEl) return;
+
+    // Days + hours uptime
+    const diff  = Date.now() - LAUNCH;
+    const days  = Math.floor(diff / 86_400_000);
+    const hours = Math.floor((diff % 86_400_000) / 3_600_000);
+    uptimeEl.textContent = `${days}d ${hours}h`;
+
+    // Slightly randomised load average
+    loadEl.textContent = (Math.random() * 0.5 + 0.08).toFixed(2);
+
+    // Cycle status message
+    const s = statuses[si % statuses.length];
+    statusEl.textContent = s.label;
+    statusEl.className   = s.cls;
+    si++;
+  }
+
+  tick();
+  setInterval(tick, 4000);
 </script>

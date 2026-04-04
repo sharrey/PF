@@ -131,3 +131,11 @@ resize();
 animate();
 
 window.addEventListener('resize', resize);
+
+// ── React to theme changes ─────────────────────────────────
+document.addEventListener('themechange', (e) => {
+  const amber = e.detail.theme === 'amber';
+  const col = amber ? 0xd97706 : 0x22c55e;
+  pMat.color.setHex(col);
+  lMat.color.setHex(col);
+});
