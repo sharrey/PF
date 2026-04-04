@@ -1,48 +1,59 @@
 ---
-import {
-  Astronav,
-  MenuItems,
-  MenuIcon,
-  Dropdown,
-  DropdownItems,
-  DropdownSubmenu,
-} from "astro-navbar";
+const pathname = Astro.url.pathname;
 ---
 
-<header class="lg:flex p-5 gap-5">
-  <Astronav>
-    <div class="flex w-full justify-between">
-   <a href="/" class="relative group block h-12 w-11 overflow-hidden">
-  <!-- Fire GIF (visible on hover) -->
-  <img
-    src="/rizz/fire.gif"
-    alt="fire background"
-    class="absolute top-0 left-0 h-full w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
-  />
+<header class="sticky top-0 z-50 border-b border-zinc-900" style="background: rgba(7,7,7,0.95); backdrop-filter: blur(8px);">
+  <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
 
-  <!-- Logo (hides on hover) -->
-  <img
-    src="/rizz/logo2.png"
-    alt="Logo"
-    class="relative h-full w-full group-hover:opacity-0 transition-opacity duration-300 z-20"
-  />
-</a>
-
-
-      <div class="block md:hidden"><MenuIcon class="w-4 h-4 text-white" /></div>
-    </div>
-    <MenuItems class="hidden lg:flex">
-  <ul class="flex flex-col lg:flex-row lg:gap-1 text-center">
-  <li class="w-full"> <!-- tweak this value -->
-    <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" class="text-red-500">
-      <span class="font-bold">Don't</span>  
-      <span class="text-white">Click</span>
-      <span class="text-white">Here</span>
+    <!-- Logo / brand -->
+    <a href="/" class="flex items-center gap-2 group">
+      <div class="relative h-8 w-8 overflow-hidden">
+        <img
+          src="/rizz/fire.gif"
+          alt=""
+          class="absolute inset-0 h-full w-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+        />
+        <img
+          src="/rizz/logo2.png"
+          alt="sharriy"
+          class="relative h-full w-full group-hover:opacity-0 transition-opacity duration-200"
+        />
+      </div>
+      <span class="font-bold text-sm text-white" style="font-family: 'Pixelify Sans', monospace;">
+        sharriy<span class="text-green-500">.sh</span>
+      </span>
     </a>
-  </li>
-</ul>
 
-</MenuItems>
+    <!-- Nav links -->
+    <nav class="flex items-center gap-1">
+      <a
+        href="/"
+        class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname === '/' ? 'text-green-400' : ''}`}
+      >
+        ~/home
+      </a>
+      <a
+        href="/about"
+        class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname === '/about' ? 'text-green-400' : ''}`}
+      >
+        ~/about
+      </a>
+      <a
+        href="/blog"
+        class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname.startsWith('/blog') ? 'text-green-400' : ''}`}
+      >
+        ~/blog
+      </a>
+      <a
+        href="https://github.com/Sharriyyy"
+        target="_blank"
+        rel="noopener"
+        class="nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 flex items-center gap-1"
+      >
+        <img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg" class="w-3.5 h-3.5 opacity-60" alt="" />
+        ~/github
+      </a>
+    </nav>
 
-  </Astronav>
+  </div>
 </header>

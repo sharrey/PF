@@ -1,11 +1,22 @@
 ---
-
 ---
 
-<footer class="text-center mt-auto py-4"></footer>
+<footer class="border-t border-zinc-900 mt-auto">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+    <span class="font-mono text-xs text-zinc-700">
+      <span class="text-green-600">sharriy@devops</span>:<span class="text-blue-600">~</span>$
+      <span class="text-zinc-600 ml-1">uptime <span id="copyright"></span></span>
+    </span>
+    <div class="flex items-center gap-4 font-mono text-xs text-zinc-700">
+      <a href="/" class="hover:text-green-500 transition-colors">home</a>
+      <a href="/about" class="hover:text-green-500 transition-colors">about</a>
+      <a href="/blog" class="hover:text-green-500 transition-colors">blog</a>
+      <span>// no rights reserved</span>
+    </div>
+  </div>
+</footer>
 
 <script>
-  document.querySelector("#copyright").textContent = new Date()
-    .getFullYear()
-    .toString();
+  const el = document.getElementById('copyright');
+  if (el) el.textContent = new Date().getFullYear().toString();
 </script>

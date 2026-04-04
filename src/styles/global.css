@@ -1,5 +1,4 @@
-/* global.css */
-
+/* Confetti canvas */
 canvas#confetti-canvas {
   position: fixed !important;
   top: 0;
@@ -10,6 +9,27 @@ canvas#confetti-canvas {
   z-index: 9999;
 }
 
+/* ── CRT scanlines ─────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.07) 3px,
+    rgba(0, 0, 0, 0.07) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ── Animations ────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
 
 @keyframes bounce-slow {
   0%, 100% {
@@ -22,12 +42,92 @@ canvas#confetti-canvas {
   }
 }
 
-.animate-bounce-slow {
-  animation: bounce-slow 2.2s infinite;
+@keyframes flicker {
+  0%, 89%, 91%, 93%, 100% { opacity: 1; }
+  90%  { opacity: 0.75; }
+  92%  { opacity: 0.95; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Utility classes ───────────────────────────── */
+.animate-bounce-slow { animation: bounce-slow 2.2s infinite; }
+.flicker             { animation: flicker 8s ease-in-out infinite; }
+.fade-up             { animation: fadeSlideUp 0.6s ease forwards; }
+
+/* Block cursor */
+.cursor-blink {
+  display: inline-block;
+  width: 9px;
+  height: 1em;
+  background: #22c55e;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+/* Glow text */
+.glow-green {
+  color: #22c55e;
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.55);
+}
+.glow-amber {
+  color: #f59e0b;
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.55);
+}
+
+/* ── Blog / project cards ─────────────────────── */
+.blog-card {
+  transition: border-color 0.15s ease, transform 0.15s ease;
+  text-decoration: none;
+  display: block;
+}
+.blog-card:hover {
+  border-color: #22c55e !important;
+  transform: translateY(-3px);
+}
+
+/* ── Code blocks ───────────────────────────────── */
+.code-block {
+  background: #0a0a0a;
+  border: 1px solid #1e1e1e;
+  border-left: 3px solid #22c55e;
+  border-radius: 0 0 0.5rem 0.5rem;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-family: 'Pixelify Sans', monospace;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: #9ca3af;
+  white-space: pre;
+}
+
+/* ── Nav links ─────────────────────────────────── */
+.nav-link {
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: color 0.1s;
+  font-family: 'Pixelify Sans', monospace;
+}
+.nav-link:hover { color: #22c55e; }
+
+/* ── Button celebrate wiggle ───────────────────────────── */
+@keyframes celebrate {
+  0%   { transform: scale(1);    }
+  15%  { transform: scale(0.93); }
+  30%  { transform: scale(1.07) rotate(-2deg); }
+  50%  { transform: scale(1.05) rotate(2deg);  }
+  70%  { transform: scale(1.02) rotate(-1deg); }
+  100% { transform: scale(1)    rotate(0deg);  }
+}
+
+.btn-celebrate {
+  animation: celebrate 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 html {
   scroll-behavior: smooth;
 }
-
-

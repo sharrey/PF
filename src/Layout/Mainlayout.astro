@@ -9,8 +9,9 @@ const { title, seoTitle, seoDesc } = Astro.props;
 <html lang="en">
   <head>
     <MainHead title={title} seoTitle={seoTitle} seoDesc={seoDesc} />
+    <link rel="stylesheet" href="/styles/global.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" />
 
@@ -22,12 +23,15 @@ const { title, seoTitle, seoDesc } = Astro.props;
     <!-- Local Scripts -->
     <script src="/scripts/hero-typed.js" defer></script>
     <script src="/scripts/terminal.js" defer></script>
+    <script src="/scripts/animations.js" defer></script>
     <script src="/scripts/confetti.js" type="module"></script>
   </head>
 
-  <body class="bg-black text-white grid gap-0" style="font-family: 'Pixelify Sans', sans-serif; min-height: 100vh;">
+  <body class="bg-black text-white flex flex-col" style="font-family: 'Pixelify Sans', sans-serif; min-height: 100vh;">
     <Nav />
-    <slot />
+    <main class="flex-1">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>

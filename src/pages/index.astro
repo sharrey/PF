@@ -1,131 +1,244 @@
 ---
 import Mainlayout from "../Layout/Mainlayout.astro";
+import { posts } from "../data/posts";
 
-const name = "sharriy";
+const featured = posts.slice(0, 3);
+
+const categoryColor: Record<string, string> = {
+  green: 'text-green-400',
+  amber: 'text-amber-400',
+  blue:  'text-blue-400',
+  red:   'text-red-400',
+};
 ---
 
 <Mainlayout
-  title="sharriy - DevOps Wizard"
-  seoTitle="sharriy is a DevOps Engineer"
-  seoDesc="DevOps | Cloud | Automation | CI/CD"
+  title="sharriy.sh — DevOps Engineer"
+  seoTitle="sharriy — DevOps Engineer"
+  seoDesc="DevOps | Cloud | Automation | CI/CD | Kubernetes"
 >
-  <link rel="stylesheet" href="/styles/global.css" />
-   <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css"
-    />
-    
- 
-</Mainlayout>
-<!-- TERMINAL CONTAINER (with pixel font & dark terminal) -->
-<div id="terminal" class="w-10/12 md:w-8/12 mx-auto mt-10 rounded-lg border border-zinc-800 shadow-lg" style="font-family: 'Pixelify Sans', monospace;"></div>
 
-<!-- HERO SECTION -->
-<div class="min-h-screen bg-black text-white flex flex-col justify-center">
-  <div class="w-10/12 md:w-7/12 mx-auto mb-32">
-    <br>  
-    <h1 class="text-4xl md:text-5xl text-center font-bold mb-6">
-      Hey there, 👋 I'm <span class="text-green-400">sharriy</span>
-    </h1>
-    <div id="typed-strings">
-      <p>I’m a <strong>DevOps Engineer</strong></p>
-      <p>I automate CI/CD pipelines using Jenkins & GitHub Actions</p>
-      <p>I containerize apps with Docker & scale them on Kubernetes</p>
-      <p>I work across AWS, Azure, and modern IaaS platforms</p>
+<!-- HERO ─────────────────────────────────────────────────── -->
+<section class="relative min-h-screen overflow-hidden">
+
+  <!-- Three.js canvas (behind content) -->
+  <canvas
+    id="hero-canvas"
+    class="absolute inset-0 w-full h-full pointer-events-none"
+    style="z-index:0;"
+  ></canvas>
+
+  <!-- Vertically centred content -->
+  <div class="relative flex flex-col justify-center px-6 py-20 max-w-5xl mx-auto min-h-screen" style="z-index:1;">
+
+    <div class="font-mono text-xs text-zinc-600 mb-6 flex items-center gap-2">
+      <span class="text-green-600">sharriy@devops</span><span>:</span><span class="text-blue-400">~</span><span>$</span>
+      <span class="text-zinc-500">./run portfolio.sh</span>
     </div>
-    <div class="text-center text-xl text-gray-300"><span id="typed"></span></div>
+
+    <h1 class="text-5xl md:text-7xl font-bold mb-4 leading-none" style="font-family: 'Pixelify Sans', monospace;">
+      <span class="text-zinc-300">hey, i'm </span><span class="text-green-400 flicker">sharriy</span>
+    </h1>
+
+    <div class="font-mono text-lg md:text-xl text-zinc-400 mb-3 flex items-center gap-1">
+      <span class="text-green-500 mr-1">▸</span>
+      <span id="typed"></span><span class="cursor-blink ml-0.5"></span>
+    </div>
+    <div id="typed-strings" class="hidden">
+      <p>DevOps Engineer</p>
+      <p>automating CI/CD pipelines</p>
+      <p>containerizing things with Docker &amp; K8s</p>
+      <p>breaking prod at 2AM — fixing it by 2:05</p>
+      <p>your infrastructure's best friend</p>
+    </div>
+
+    <p class="font-mono text-sm text-zinc-600 max-w-xl mb-8 leading-relaxed">
+      Building pipelines. Containerizing everything.<br />
+      Turning "works on my machine" into "works everywhere".
+    </p>
+
+    <div class="flex flex-wrap gap-3 font-mono text-sm">
+      <a href="/about"
+        class="border border-green-800 text-green-400 px-5 py-2 rounded-lg hover:bg-green-500 hover:text-black hover:border-green-500 transition-all duration-150">
+        ./about_me
+      </a>
+      <a href="/blog"
+        class="border border-amber-800 text-amber-400 px-5 py-2 rounded-lg hover:bg-amber-500 hover:text-black hover:border-amber-500 transition-all duration-150">
+        ./blog
+      </a>
+      <a href="https://github.com/Sharriyyy" target="_blank" rel="noopener"
+        class="border border-zinc-700 text-zinc-500 px-5 py-2 rounded-lg hover:border-zinc-400 hover:text-white transition-all duration-150 flex items-center gap-2">
+        <img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg" class="w-4 h-4 opacity-60" alt="" />
+        ./github ↗
+      </a>
+    </div>
   </div>
 
-  <div class="flex flex-col md:flex-row mt-20">
-      <div class="min-w-[50%] flex flex-col justify-center items-center text-center p-6">
-        <h1 class="text-6xl mb-0">
-      Orchestrate smarter<span class="gradient-text"> with Me!! 🤖 🎊</span>
-    </h1>
-        <br>
-        <p class="text-2xl text-gray3">
-           
-          <img-reveal src="/img/speed.gif"><span class="text-yellow-500 font-bold">blazingly fast deployments </span></img-reveal>
-          &amp;
-          <img-reveal src="/img/cat.gif"><span class="text-pink-500 font-bold">highly-scalable</span></img-reveal>
-          way to level up your cloud platform
-        </p>
+  <!-- Scroll arrow pinned absolutely to bottom of section -->
+  <div class="absolute bottom-5 left-1/2 -translate-x-1/2 font-mono text-xs text-zinc-700 animate-bounce-slow" style="z-index:1;">
+    ↓ scroll
+  </div>
+</section>
 
-
+<!-- TERMINAL ─────────────────────────────────────────────── -->
+<section class="px-6 pt-6 pb-8">
+  <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-xs text-zinc-600 mb-4 flex items-center gap-3">
+      <span class="text-green-600">──</span>
+      <span>$ kubectl get pods --all-namespaces</span>
+    </div>
+    <div class="border border-zinc-800 overflow-hidden rounded-xl" style="background:#0f0f0f;">
+      <div class="flex items-center gap-2 px-4 py-2 border-b border-zinc-800" style="background:#111;">
+        <span class="w-3 h-3 rounded-full bg-red-600 opacity-80"></span>
+        <span class="w-3 h-3 rounded-full bg-yellow-500 opacity-80"></span>
+        <span class="w-3 h-3 rounded-full bg-green-500 opacity-80"></span>
+        <span class="ml-4 text-xs text-zinc-600 font-mono">sharriy@devops — bash — 120×30</span>
       </div>
+      <div id="terminal" class="w-full" style="padding: 4px;"></div>
+    </div>
+  </div>
+</section>
 
-      <div class="flex w-full relative items-center justify-center">
-        <div class="w-full mx-auto md:bg-[url('/img/tv.png')] bg-no-repeat bg-cover md:w-[500px] md:max-w-[700px] md:min-h-[300px] mt-20 md:mt-0">
-            <img class="size-30" src="/images/cloudd.png" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></img>
-        </div>
-
-      </div>
+<!-- SKILLS ───────────────────────────────────────────────── -->
+<section class="px-6 pt-8 pb-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-xs text-zinc-600 mb-6 flex items-center gap-3">
+      <span class="text-green-600">──</span>
+      <span>$ cat stack.yaml</span>
     </div>
 
-<!-- CTA / HARDTRUTH -->
-<div class="dmin-h-screen flex flex-col justify-center items-center mt-16">
-  <button class="px-6 py-3 text-6xl font-bold bg-red-600 text-white rounded-xl shadow-xl">
-    HARDTRUTH
-  </button>
-  <h1 class="text-5xl mt-14 animate-bounce-slow">👇</h1>
-</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-skills>
 
-<!-- TRUTH SECTION -->
-<div class="mt-16 flex flex-col justify-center items-center text-white">
-  <p
-    data-aos="fade-in"
-    data-aos-delay="50"
-    class="text-5xl text-center"
-  >
-    You <span class="text-red-500">CAN'T</span> master DevOps without <strong class="text-green-400">hands-on experience</strong>
-  </p>
-  <h1 class="mt-16 text-lg animate-bounce-slow">logs > lectures 😓</h1>
-</div>
+      {[
+        {
+          label: 'containers',
+          items: [
+            { name: 'Kubernetes', pct: 80 },
+            { name: 'Docker',     pct: 92 },
+            { name: 'Helm',       pct: 70 },
+          ],
+        },
+        {
+          label: 'ci/cd',
+          items: [
+            { name: 'GitHub Actions', pct: 90 },
+            { name: 'Jenkins',        pct: 80 },
+            { name: 'ArgoCD',         pct: 70 },
+          ],
+        },
+        {
+          label: 'cloud',
+          items: [
+            { name: 'AWS',   pct: 82 },
+            { name: 'Azure', pct: 70 },
+            { name: 'GCP',   pct: 60 },
+          ],
+        },
+        {
+          label: 'iac',
+          items: [
+            { name: 'Terraform', pct: 80 },
+            { name: 'Ansible',   pct: 72 },
+            { name: 'Pulumi',    pct: 50 },
+          ],
+        },
+      ].map(group => (
+        <div class="border border-zinc-800 p-5 rounded-xl hover:border-zinc-700 transition-colors" data-card>
+          <div class="font-mono text-xs text-amber-500 mb-4 uppercase tracking-widest">{group.label}</div>
+          <div class="space-y-3 font-mono text-xs">
+            {group.items.map(s => (
+              <div>
+                <div class="flex justify-between text-zinc-400 mb-1">
+                  <span><span class="text-green-600">▸</span> {s.name}</span>
+                  <span class="skill-pct text-zinc-600" data-pct={s.pct}>0%</span>
+                </div>
+                <div class="h-0.5 bg-zinc-800 rounded-full">
+                  <div class="skill-bar-fill h-full bg-green-500 rounded-full" data-pct={s.pct} style="width:0%; box-shadow: 0 0 4px rgba(34,197,94,0.4);"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
 
-<!-- SOLUTION SECTION -->
-<div class="mt-20 flex flex-col justify-center items-center text-white">
-  <span
-    data-aos="fade-right"
-    class="text-7xl font-bold px-4 bg-green-500 text-black"
-  >
-    SOLUTION
-  </span>
-  <p class="text-3xl text-gray-300 max-w-3xl mt-12 text-center">
-    Get your hands dirty with <span class="text-green-400">Terraform, CI/CD Pipelines, Dockerfiles, Helm Charts</span> — break things and fix them. It’s the <span class="text-yellow-400">DevOps way</span>.
-  </p>
-  <h1 class="text-xl animate-bounce-slow mt-20">but like... where do I start? 🤯</h1>
-</div>
+    </div>
+  </div>
+</section>
 
-<!-- CTA -->
-<!-- CTA -->
-<div class="flex flex-col justify-center items-center mt-16">
+<!-- HARD TRUTH ───────────────────────────────────────────── -->
+<section class="px-6 py-8 border-t border-b border-zinc-900">
+  <div class="max-w-5xl mx-auto text-center font-mono">
+    <div class="text-xs text-zinc-700 mb-4">$ cat hardtruth.txt</div>
+    <p class="text-3xl md:text-5xl text-white leading-tight mb-3" data-aos="fade-in" data-aos-delay="50">
+      You <span class="text-red-500">CAN'T</span> master DevOps<br class="hidden md:block" />
+      without <span class="text-green-400">hands-on experience</span>
+    </p>
+    <p class="text-zinc-600 text-sm mt-3">logs &gt; lectures &nbsp;·&nbsp; break things &nbsp;·&nbsp; fix them faster</p>
+    <div class="mt-4 text-zinc-700 text-xs animate-bounce-slow">↓</div>
+  </div>
+</section>
+
+<!-- BLOG PREVIEW ─────────────────────────────────────────── -->
+<section class="px-6 pt-8 pb-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-xs text-zinc-600 mb-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="text-green-600">──</span>
+        <span>$ ls -la ./blog/</span>
+      </div>
+      <a href="/blog" class="text-zinc-700 hover:text-green-400 transition-colors">cat all →</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {featured.map(post => (
+        <a href={`/blog/${post.slug}`} class="blog-card border border-zinc-800 p-5 rounded-xl" data-card>
+          <div class={`font-mono text-xs mb-3 uppercase tracking-widest ${categoryColor[post.categoryColor]}`}>
+            {post.category}
+          </div>
+          <h3 class="font-bold text-sm text-zinc-200 mb-3 leading-snug" style="font-family: 'Pixelify Sans', monospace;">
+            {post.title}
+          </h3>
+          <p class="font-mono text-xs text-zinc-600 mb-5 leading-relaxed">{post.excerpt}</p>
+          <div class="flex justify-between items-center font-mono text-xs text-zinc-700">
+            <span>{post.date}</span>
+            <span>{post.readTime}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CTA ──────────────────────────────────────────────────── -->
+<section class="px-6 py-10 flex flex-col items-center text-center">
+  <div class="font-mono text-xs text-zinc-700 mb-6">$ echo "ready to ship?"</div>
   <button
     id="confetti-button"
+    class="px-10 py-5 text-4xl md:text-6xl font-bold bg-green-500 text-black rounded-2xl hover:bg-green-400 active:scale-95 transition-all duration-150 shadow-lg shadow-green-900/30"
+    style="font-family: 'Pixelify Sans', monospace;"
     data-aos="fade-right"
-    class="px-6 py-3 text-6xl font-bold bg-purple-600 text-white rounded-xl shadow-xl"
   >
     LET'S SHIP IT 🚀
   </button>
-</div>
+  <p class="font-mono text-xs text-zinc-700 mt-4">warning: may cause uncontrolled deployments</p>
+</section>
 
-
-<!-- SOCIAL FOOTER -->
-<div class="mt-20 flex flex-col justify-center items-center text-white">
-  <p class="text-3xl text-gray-300 max-w-3xl text-center">
-    Follow for memes, tools, and terminal magic. <span class="text-yellow-400">PLAY</span> with infra before you pay.
-  </p>
-  <h1 class="text-xl animate-bounce-slow mt-20">💻 #RealEngineersUseLogs</h1>
-  <h1 class="mt-16">
-    <a class="text-blue-400" href="">Fix something? PR it on GitHub</a>
-  </h1>
-  <h1 class="mt-4">
-    <a href="https://github.com/sharrey"><strong class="font-bold">Find me  <span class="text-green-500"> HERE 🤖</span></strong></a>
-  </h1>
-  <div class="flex justify-center items-center my-4">
-    
-   <a class="w-10 h-10" href="https://github.com/Sharriyyy"><img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg"></a>
-     
-    </a>
+<!-- SOCIAL ───────────────────────────────────────────────── -->
+<section class="px-6 py-6 border-t border-zinc-900">
+  <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-xs">
+    <span class="text-zinc-700">$ find sharriy --on-the-internet</span>
+    <div class="flex items-center gap-5">
+      <a href="https://github.com/Sharriyyy" target="_blank" rel="noopener"
+        class="text-zinc-600 hover:text-green-400 transition-colors flex items-center gap-2">
+        <img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg" class="w-4 h-4 opacity-50" alt="GitHub" />
+        github
+      </a>
+      <span class="text-zinc-800">#RealEngineersUseLogs</span>
+    </div>
   </div>
-</div>
+</section>
 
+</Mainlayout>
 
+<!-- Three.js particle network (only on this page) -->
+<script type="module" src="/scripts/hero-three.js"></script>
