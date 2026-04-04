@@ -2,6 +2,7 @@
 import MainHead from "./MainHead.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 
 const { title, seoTitle, seoDesc } = Astro.props;
 ---
@@ -9,7 +10,6 @@ const { title, seoTitle, seoDesc } = Astro.props;
 <html lang="en">
   <head>
     <MainHead title={title} seoTitle={seoTitle} seoDesc={seoDesc} />
-    <link rel="stylesheet" href="/styles/global.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />

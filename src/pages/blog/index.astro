@@ -17,61 +17,61 @@ const colorMap = {
 >
 
 <!-- HEADER ─────────────────────────────────────────────── -->
-<section class="px-6 pt-10 pb-6 max-w-5xl mx-auto">
-  <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-2">
+<section class="px-4 sm:px-6 pt-10 pb-6 max-w-5xl mx-auto">
+  <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-2 flex-wrap">
     <span class="text-green-600">sharriy@devops</span><span>:</span><span class="text-blue-400">~</span><span>$</span>
     <span class="text-zinc-500">ls -la ./blog/</span>
   </div>
 
-  <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">
+  <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3">
     /blog<span class="text-green-400 flicker">_</span>
   </h1>
-  <p class="font-mono text-sm text-zinc-600 mb-2">
+  <p class="font-mono text-xs sm:text-sm text-zinc-600 mb-2">
     {posts.length} posts &nbsp;·&nbsp; DevOps, Cloud, Containers, and the things that keep me up at night.
   </p>
 </section>
 
 <!-- POST LIST ──────────────────────────────────────────── -->
-<section class="px-6 pb-12 max-w-5xl mx-auto">
+<section class="px-4 sm:px-6 pb-12 max-w-5xl mx-auto">
 
-  <!-- Category filter labels (visual only) -->
+  <!-- Category filter labels -->
   <div class="flex flex-wrap gap-2 font-mono text-xs mb-6">
     {['all', 'Kubernetes', 'Docker', 'CI/CD', 'Terraform'].map(cat => (
-      <span class="border border-zinc-800 text-zinc-600 px-3 py-1 rounded-md cursor-default hover:border-zinc-600 hover:text-zinc-400 transition-colors">
+      <span class="border border-zinc-800 text-zinc-600 px-3 py-1 rounded-lg cursor-default hover:border-zinc-600 hover:text-zinc-400 transition-colors glass-card">
         {cat}
       </span>
     ))}
   </div>
 
-  <!-- Posts grid -->
-  <div class="space-y-4">
+  <!-- Posts list -->
+  <div class="space-y-3">
     {posts.map((post, i) => {
       const colors = colorMap[post.categoryColor] ?? 'text-zinc-400 border-zinc-800';
       return (
-        <a href={`/blog/${post.slug}`} class="blog-card border border-zinc-800 p-6 rounded-xl flex flex-col md:flex-row md:items-start gap-5">
+        <a href={`/blog/${post.slug}`} class="blog-card glass-card p-5 sm:p-6 rounded-xl flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-5">
 
           <!-- Index number -->
-          <div class="font-mono text-2xl text-zinc-800 shrink-0 hidden md:block" style="min-width: 2rem;">
+          <div class="font-mono text-xl sm:text-2xl text-zinc-800 shrink-0 hidden sm:block" style="min-width: 2rem;">
             {String(i + 1).padStart(2, '0')}
           </div>
 
           <!-- Content -->
-          <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-3 mb-3">
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
               <span class={`font-mono text-xs uppercase tracking-widest border px-2 py-0.5 rounded-md ${colors}`}>
                 {post.category}
               </span>
               <span class="font-mono text-xs text-zinc-700">{post.date}</span>
               <span class="font-mono text-xs text-zinc-700">{post.readTime}</span>
             </div>
-            <h2 class="font-bold text-white mb-2 leading-snug">
+            <h2 class="font-bold text-sm sm:text-base text-white mb-2 leading-snug">
               {post.title}
             </h2>
             <p class="font-mono text-xs text-zinc-600 leading-relaxed">{post.excerpt}</p>
           </div>
 
           <!-- Arrow -->
-          <div class="font-mono text-zinc-700 group-hover:text-green-400 transition-colors shrink-0 self-center text-lg hidden md:block">
+          <div class="font-mono text-zinc-700 shrink-0 self-center text-lg hidden sm:block">
             →
           </div>
 

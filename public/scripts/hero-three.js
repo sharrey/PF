@@ -134,8 +134,11 @@ window.addEventListener('resize', resize);
 
 // ── React to theme changes ─────────────────────────────────
 document.addEventListener('themechange', (e) => {
-  const amber = e.detail.theme === 'amber';
-  const col = amber ? 0xd97706 : 0x22c55e;
+  const light = e.detail.theme === 'light';
+  // Light mode: darker green so particles are visible on white bg
+  const col = light ? 0x15803d : 0x22c55e;
   pMat.color.setHex(col);
   lMat.color.setHex(col);
+  pMat.opacity = light ? 0.55 : 0.65;
+  lMat.opacity = light ? 0.15 : 0.10;
 });

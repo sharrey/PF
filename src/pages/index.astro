@@ -29,18 +29,18 @@ const categoryColor: Record<string, string> = {
   ></canvas>
 
   <!-- Vertically centred content -->
-  <div class="relative flex flex-col justify-center px-6 py-20 max-w-5xl mx-auto min-h-screen" style="z-index:1;">
+  <div class="relative flex flex-col justify-center px-4 sm:px-6 py-20 max-w-5xl mx-auto min-h-screen" style="z-index:1;">
 
-    <div class="font-mono text-xs text-zinc-600 mb-6 flex items-center gap-2">
+    <div class="font-mono text-xs text-zinc-600 mb-5 flex items-center gap-2 flex-wrap">
       <span class="text-green-600">sharriy@devops</span><span>:</span><span class="text-blue-400">~</span><span>$</span>
       <span class="text-zinc-500">./run portfolio.sh</span>
     </div>
 
-    <h1 class="text-5xl md:text-7xl font-bold mb-4 leading-none">
+    <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 leading-none">
       <span class="text-zinc-300">hey, i'm </span><span class="text-green-400 flicker">sharriy</span>
     </h1>
 
-    <div class="font-mono text-lg md:text-xl text-zinc-400 mb-3 flex items-center gap-1">
+    <div class="font-mono text-base sm:text-lg md:text-xl text-zinc-400 mb-3 flex items-center gap-1">
       <span class="text-green-500 mr-1">▸</span>
       <span id="typed"></span><span class="cursor-blink ml-0.5"></span>
     </div>
@@ -52,55 +52,55 @@ const categoryColor: Record<string, string> = {
       <p>your infrastructure's best friend</p>
     </div>
 
-    <p class="font-mono text-sm text-zinc-600 max-w-xl mb-8 leading-relaxed">
+    <p class="font-mono text-xs sm:text-sm text-zinc-600 max-w-xl mb-8 leading-relaxed">
       Building pipelines. Containerizing everything.<br />
       Turning "works on my machine" into "works everywhere".
     </p>
 
     <div class="flex flex-wrap gap-3 font-mono text-sm">
       <a href="/about"
-        class="border border-green-800 text-green-400 px-5 py-2 rounded-lg hover:bg-green-500 hover:text-black hover:border-green-500 transition-all duration-150">
+        class="border border-green-800 text-green-400 px-4 sm:px-5 py-2 rounded-lg hover:bg-green-500 hover:text-black hover:border-green-500 transition-all duration-150">
         ./about_me
       </a>
       <a href="/blog"
-        class="border border-amber-800 text-amber-400 px-5 py-2 rounded-lg hover:bg-amber-500 hover:text-black hover:border-amber-500 transition-all duration-150">
+        class="border border-amber-800 text-amber-400 px-4 sm:px-5 py-2 rounded-lg hover:bg-amber-500 hover:text-black hover:border-amber-500 transition-all duration-150">
         ./blog
       </a>
       <a href="https://github.com/sharrey" target="_blank" rel="noopener"
-        class="border border-zinc-700 text-zinc-500 px-5 py-2 rounded-lg hover:border-zinc-400 hover:text-white transition-all duration-150 flex items-center gap-2">
+        class="border border-zinc-700 text-zinc-500 px-4 sm:px-5 py-2 rounded-lg hover:border-zinc-400 hover:text-white transition-all duration-150 flex items-center gap-2">
         <img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg" class="w-4 h-4 opacity-60" alt="" />
         ./github ↗
       </a>
     </div>
   </div>
 
-  <!-- Scroll arrow pinned absolutely to bottom of section -->
+  <!-- Scroll arrow -->
   <div class="absolute bottom-5 left-1/2 -translate-x-1/2 font-mono text-xs text-zinc-700 animate-bounce-slow" style="z-index:1;">
     ↓ scroll
   </div>
 </section>
 
 <!-- TERMINAL ─────────────────────────────────────────────── -->
-<section class="px-6 pt-6 pb-8">
+<section class="px-4 sm:px-6 pt-6 pb-8">
   <div class="max-w-5xl mx-auto">
     <div class="font-mono text-xs text-zinc-600 mb-4 flex items-center gap-3">
       <span class="text-green-600">──</span>
       <span>$ kubectl get pods --all-namespaces</span>
     </div>
-    <div class="border border-zinc-800 overflow-hidden rounded-xl" style="background:#0f0f0f;">
-      <div class="flex items-center gap-2 px-4 py-2 border-b border-zinc-800" style="background:#111;">
+    <div class="glass-card overflow-hidden rounded-xl">
+      <div class="flex items-center gap-2 px-4 py-2 border-b border-white/5" style="background: rgba(255,255,255,0.03);">
         <span class="w-3 h-3 rounded-full bg-red-600 opacity-80"></span>
         <span class="w-3 h-3 rounded-full bg-yellow-500 opacity-80"></span>
         <span class="w-3 h-3 rounded-full bg-green-500 opacity-80"></span>
         <span class="ml-4 text-xs text-zinc-600 font-mono">sharriy@devops — bash — 120×30</span>
       </div>
-      <div id="terminal" class="w-full" style="padding: 4px;"></div>
+      <div id="terminal" class="w-full overflow-x-auto" style="padding: 4px;"></div>
     </div>
   </div>
 </section>
 
 <!-- SKILLS ───────────────────────────────────────────────── -->
-<section class="px-6 pt-8 pb-6">
+<section class="px-4 sm:px-6 pt-8 pb-6">
   <div class="max-w-5xl mx-auto">
     <div class="font-mono text-xs text-zinc-600 mb-6 flex items-center gap-3">
       <span class="text-green-600">──</span>
@@ -143,7 +143,7 @@ const categoryColor: Record<string, string> = {
           ],
         },
       ].map(group => (
-        <div class="border border-zinc-800 p-5 rounded-xl hover:border-zinc-700 transition-colors" data-card>
+        <div class="glass-card p-5 rounded-xl" data-card>
           <div class="font-mono text-xs text-amber-500 mb-4 uppercase tracking-widest">{group.label}</div>
           <div class="space-y-3 font-mono text-xs">
             {group.items.map(s => (
@@ -166,22 +166,22 @@ const categoryColor: Record<string, string> = {
 </section>
 
 <!-- HARD TRUTH ───────────────────────────────────────────── -->
-<section class="px-6 py-8 border-t border-b border-zinc-900">
+<section class="px-4 sm:px-6 py-8 border-t border-b border-zinc-900">
   <div class="max-w-5xl mx-auto text-center font-mono">
     <div class="text-xs text-zinc-700 mb-4">$ cat hardtruth.txt</div>
-    <p class="text-3xl md:text-5xl text-white leading-tight mb-3" data-aos="fade-in" data-aos-delay="50">
-      You <span class="text-red-500">CAN'T</span> master DevOps<br class="hidden md:block" />
+    <p class="text-2xl sm:text-3xl md:text-5xl text-white leading-tight mb-3" data-aos="fade-in" data-aos-delay="50">
+      You <span class="text-red-500">CAN'T</span> master DevOps<br class="hidden sm:block" />
       without <span class="text-green-400">hands-on experience</span>
     </p>
-    <p class="text-zinc-600 text-sm mt-3">logs &gt; lectures &nbsp;·&nbsp; break things &nbsp;·&nbsp; fix them faster</p>
+    <p class="text-zinc-600 text-xs sm:text-sm mt-3">logs &gt; lectures &nbsp;·&nbsp; break things &nbsp;·&nbsp; fix them faster</p>
     <div class="mt-4 text-zinc-700 text-xs animate-bounce-slow">↓</div>
   </div>
 </section>
 
 <!-- BLOG PREVIEW ─────────────────────────────────────────── -->
-<section class="px-6 pt-8 pb-6">
+<section class="px-4 sm:px-6 pt-8 pb-6">
   <div class="max-w-5xl mx-auto">
-    <div class="font-mono text-xs text-zinc-600 mb-6 flex items-center justify-between">
+    <div class="font-mono text-xs text-zinc-600 mb-6 flex items-center justify-between flex-wrap gap-2">
       <div class="flex items-center gap-3">
         <span class="text-green-600">──</span>
         <span>$ ls -la ./blog/</span>
@@ -191,7 +191,7 @@ const categoryColor: Record<string, string> = {
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       {featured.map(post => (
-        <a href={`/blog/${post.slug}`} class="blog-card border border-zinc-800 p-5 rounded-xl" data-card>
+        <a href={`/blog/${post.slug}`} class="blog-card glass-card p-5 rounded-xl" data-card>
           <div class={`font-mono text-xs mb-3 uppercase tracking-widest ${categoryColor[post.categoryColor]}`}>
             {post.category}
           </div>
@@ -210,12 +210,11 @@ const categoryColor: Record<string, string> = {
 </section>
 
 <!-- CTA ──────────────────────────────────────────────────── -->
-<section class="px-6 py-10 flex flex-col items-center text-center">
+<section class="px-4 sm:px-6 py-10 flex flex-col items-center text-center">
   <div class="font-mono text-xs text-zinc-700 mb-6">$ echo "ready to ship?"</div>
   <button
     id="confetti-button"
-    class="px-10 py-5 text-4xl md:text-6xl font-bold bg-green-500 text-black rounded-2xl hover:bg-green-400 active:scale-95 transition-all duration-150 shadow-lg shadow-green-900/30"
-   
+    class="px-6 sm:px-10 py-4 sm:py-5 text-3xl sm:text-4xl md:text-6xl font-bold bg-green-500 text-black rounded-2xl hover:bg-green-400 active:scale-95 transition-all duration-150 shadow-lg shadow-green-900/30"
     data-aos="fade-right"
   >
     LET'S SHIP IT 🚀
@@ -224,7 +223,7 @@ const categoryColor: Record<string, string> = {
 </section>
 
 <!-- SOCIAL ───────────────────────────────────────────────── -->
-<section class="px-6 py-6 border-t border-zinc-900">
+<section class="px-4 sm:px-6 py-6 border-t border-zinc-900">
   <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-xs">
     <span class="text-zinc-700">$ find sharriy --on-the-internet</span>
     <div class="flex items-center gap-5">
@@ -233,7 +232,7 @@ const categoryColor: Record<string, string> = {
         <img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg" class="w-4 h-4 opacity-50" alt="GitHub" />
         github
       </a>
-      <span class="text-zinc-800">#RealEngineersUseLogs</span>
+      <span class="text-zinc-800 hidden sm:inline">#RealEngineersUseLogs</span>
     </div>
   </div>
 </section>

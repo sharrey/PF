@@ -2,11 +2,11 @@
 const pathname = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 border-b border-zinc-900" style="background: rgba(7,7,7,0.95); backdrop-filter: blur(8px);">
-  <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
+<header class="sticky top-0 z-50 border-b border-zinc-900/80" style="background: rgba(7,7,7,0.93); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between">
 
     <!-- Logo / brand -->
-    <a href="/" class="flex items-center gap-2 group">
+    <a href="/" class="flex items-center gap-2 group shrink-0">
       <div class="relative h-8 w-8 overflow-hidden">
         <img
           src="/rizz/fire.gif"
@@ -24,8 +24,8 @@ const pathname = Astro.url.pathname;
       </span>
     </a>
 
-    <!-- Nav links + toggles -->
-    <nav class="flex items-center gap-1">
+    <!-- Desktop nav (sm and up) -->
+    <nav class="hidden sm:flex items-center gap-1">
       <a href="/" class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname === '/' ? 'text-green-400' : ''}`}>
         ~/home
       </a>
@@ -45,11 +45,97 @@ const pathname = Astro.url.pathname;
       <span class="text-zinc-800 mx-1 select-none">|</span>
 
       <!-- Sound toggle -->
-      <button id="sound-toggle" class="nav-toggle" title="Toggle typing sound">[♪ on]</button>
+      <button id="sound-toggle" class="nav-toggle" title="Toggle lofi music">[&#9834; off]</button>
 
       <!-- Theme toggle -->
-    
+      <button id="theme-toggle" class="nav-toggle" title="Switch to light mode">[light]</button>
     </nav>
 
+    <!-- Mobile: quick icon toggles + hamburger -->
+    <div class="flex sm:hidden items-center gap-1.5">
+      <button id="sound-toggle-m" class="nav-toggle" style="padding: 2px 8px; font-size: 0.7rem;" title="Toggle lofi music">&#9834;</button>
+      <button id="theme-toggle-m" class="nav-toggle" style="padding: 2px 8px; font-size: 0.7rem;" title="Switch theme">&#11041;</button>
+      <button id="mobile-menu-btn" class="nav-toggle" style="padding: 2px 10px;" aria-label="Open menu" aria-expanded="false">
+        <span id="menu-icon">&#9776;</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Mobile dropdown -->
+  <div
+    id="mobile-menu"
+    class="hidden sm:hidden border-t border-zinc-900"
+    style="background: rgba(5,5,5,0.97);"
+  >
+    <nav class="max-w-5xl mx-auto px-4 py-3 flex flex-col gap-0.5">
+      <a href="/" class={`nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm ${pathname === '/' ? 'text-green-400' : ''}`}>
+        ~/home
+      </a>
+      <a href="/about" class={`nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm ${pathname === '/about' ? 'text-green-400' : ''}`}>
+        ~/about
+      </a>
+      <a href="/blog" class={`nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm ${pathname.startsWith('/blog') ? 'text-green-400' : ''}`}>
+        ~/blog
+      </a>
+      <a href="https://github.com/sharrey" target="_blank" rel="noopener"
+        class="nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm flex items-center gap-2">
+        <img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg" class="w-3.5 h-3.5 opacity-50" alt="" />
+        ~/github &#8599;
+      </a>
+    </nav>
   </div>
 </header>
+
+<script>
+  // ── Mobile menu toggle ──────────────────────────────────────
+  const menuBtn   = document.getElementById('mobile-menu-btn');
+  const mobileNav = document.getElementById('mobile-menu');
+  const menuIcon  = document.getElementById('menu-icon');
+
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = !mobileNav?.classList.contains('hidden');
+    mobileNav?.classList.toggle('hidden');
+    if (menuIcon) menuIcon.innerHTML = isOpen ? '&#9776;' : '&#10005;';
+    menuBtn?.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Close on link click
+  mobileNav?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.add('hidden');
+      if (menuIcon) menuIcon.innerHTML = '&#9776;';
+      menuBtn?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ── Mobile toggles delegate to desktop buttons ─────────────
+  // theme.js binds to #sound-toggle and #theme-toggle (desktop, hidden on mobile).
+  const soundM = document.getElementById('sound-toggle-m');
+  const themeM = document.getElementById('theme-toggle-m');
+  const soundD = document.getElementById('sound-toggle');
+  const themeD = document.getElementById('theme-toggle');
+
+  soundM?.addEventListener('click', () => soundD?.click());
+  themeM?.addEventListener('click', () => themeD?.click());
+
+  // Keep mobile sound icon tinted when playing
+  if (soundD) {
+    new MutationObserver(() => {
+      if (!soundM) return;
+      const playing = (soundD.textContent ?? '').includes('on');
+      soundM.style.color = playing ? '#22c55e' : '';
+      soundM.style.borderColor = playing ? '#22c55e' : '';
+    }).observe(soundD, { childList: true, characterData: true, subtree: true });
+  }
+
+  // Tint mobile theme icon when in light mode
+  if (themeD) {
+    new MutationObserver(() => {
+      if (!themeM) return;
+      const isLight = (themeD.textContent ?? '').includes('dark');
+      themeM.style.color = isLight ? '#16a34a' : '';
+      themeM.style.borderColor = isLight ? '#16a34a' : '';
+    }).observe(themeD, { childList: true, characterData: true, subtree: true });
+  }
+</script>

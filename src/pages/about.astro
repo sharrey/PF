@@ -37,17 +37,17 @@ const experience = [
 >
 
 <!-- HEADER ─────────────────────────────────────────────── -->
-<section class="px-6 pt-12 pb-8 max-w-5xl mx-auto">
-  <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-2">
+<section class="px-4 sm:px-6 pt-10 pb-8 max-w-5xl mx-auto">
+  <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-2 flex-wrap">
     <span class="text-green-600">sharriy@devops</span><span>:</span><span class="text-blue-400">~</span><span>$</span>
     <span class="text-zinc-500">cat about.txt</span>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
 
     <!-- Left: intro -->
     <div>
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
         sharriy<span class="text-green-400">_</span>
       </h1>
       <div class="space-y-4 font-mono text-sm text-zinc-400 leading-relaxed">
@@ -72,7 +72,7 @@ const experience = [
 
       <!-- Contact links -->
       <div class="mt-8 flex flex-wrap gap-3 font-mono text-xs">
-        <a href="https://github.com/Sharriyyy" target="_blank" rel="noopener"
+        <a href="https://github.com/sharrey" target="_blank" rel="noopener"
           class="border border-zinc-800 text-zinc-500 px-4 py-2 rounded-lg hover:border-green-700 hover:text-green-400 transition-all duration-100 flex items-center gap-2">
           <img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg" class="w-3.5 h-3.5 opacity-50" alt="" />
           github ↗
@@ -85,20 +85,20 @@ const experience = [
     </div>
 
     <!-- Right: quick stats -->
-    <div class="border border-zinc-800 p-6 rounded-xl font-mono self-start">
+    <div class="glass-card p-6 rounded-xl font-mono self-start">
       <div class="text-xs text-zinc-600 mb-4">$ kubectl describe sharriy</div>
       <div class="space-y-3 text-xs">
         {[
-          { label: 'Name',       value: 'sharriy' },
-          { label: 'Role',       value: 'DevOps Engineer' },
-          { label: 'Focus',      value: 'Cloud · Containers · Automation' },
-          { label: 'Cloud',      value: 'AWS · Azure · GCP' },
-          { label: 'OS',         value: 'Linux (always)' },
-          { label: 'Editor',     value: 'nvim (no shame)' },
-          { label: 'Status',     value: 'building in public ✓' },
+          { label: 'Name',   value: 'sharriy' },
+          { label: 'Role',   value: 'DevOps Engineer' },
+          { label: 'Focus',  value: 'Cloud · Containers · Automation' },
+          { label: 'Cloud',  value: 'AWS · Azure · GCP' },
+          { label: 'OS',     value: 'Linux (always)' },
+          { label: 'Editor', value: 'nvim (no shame)' },
+          { label: 'Status', value: 'building in public ✓' },
         ].map(row => (
-          <div class="flex gap-4">
-            <span class="text-zinc-600 w-16 shrink-0">{row.label}:</span>
+          <div class="flex gap-4 flex-wrap">
+            <span class="text-zinc-600 w-14 shrink-0">{row.label}:</span>
             <span class="text-zinc-300">{row.value}</span>
           </div>
         ))}
@@ -109,7 +109,7 @@ const experience = [
 </section>
 
 <!-- TOOLS ──────────────────────────────────────────────── -->
-<section class="px-6 py-8 border-t border-zinc-900">
+<section class="px-4 sm:px-6 py-8 border-t border-zinc-900">
   <div class="max-w-5xl mx-auto">
     <div class="font-mono text-xs text-zinc-600 mb-5 flex items-center gap-3">
       <span class="text-green-600">──</span>
@@ -117,7 +117,7 @@ const experience = [
     </div>
     <div class="flex flex-wrap gap-2">
       {tools.map(tool => (
-        <span class="font-mono text-xs border border-zinc-800 text-zinc-400 px-3 py-1 rounded-md hover:border-green-800 hover:text-green-400 transition-colors duration-100 cursor-default">
+        <span class="font-mono text-xs border border-zinc-800 text-zinc-400 px-3 py-1.5 rounded-lg hover:border-green-800 hover:text-green-400 transition-colors duration-100 cursor-default glass-card">
           {tool}
         </span>
       ))}
@@ -126,7 +126,7 @@ const experience = [
 </section>
 
 <!-- EXPERIENCE ─────────────────────────────────────────── -->
-<section class="px-6 py-8 border-t border-zinc-900">
+<section class="px-4 sm:px-6 py-8 border-t border-zinc-900">
   <div class="max-w-5xl mx-auto">
     <div class="font-mono text-xs text-zinc-600 mb-6 flex items-center gap-3">
       <span class="text-green-600">──</span>
@@ -137,20 +137,20 @@ const experience = [
       <!-- timeline spine -->
       <div class="absolute left-0 top-2 bottom-2 w-px bg-zinc-800 hidden md:block"></div>
 
-      <div class="space-y-8">
-        {experience.map((exp, i) => (
+      <div class="space-y-6">
+        {experience.map((exp) => (
           <div class="md:pl-8 relative">
             <!-- dot -->
             <div class="absolute left-[-4px] top-1.5 w-2 h-2 rounded-full bg-green-500 hidden md:block"
               style="box-shadow: 0 0 6px rgba(34,197,94,0.5);"></div>
 
-            <div class="border border-zinc-800 p-5 rounded-xl hover:border-zinc-700 transition-colors">
+            <div class="glass-card p-5 rounded-xl" data-card>
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
                 <div>
                   <span class="font-bold text-sm text-white">{exp.role}</span>
                   <span class="font-mono text-xs text-zinc-600 ml-2">@ {exp.company}</span>
                 </div>
-                <span class="font-mono text-xs text-green-600">{exp.period}</span>
+                <span class="font-mono text-xs text-green-600 shrink-0">{exp.period}</span>
               </div>
               <p class="font-mono text-xs text-zinc-500 leading-relaxed">{exp.desc}</p>
             </div>
@@ -162,14 +162,14 @@ const experience = [
 </section>
 
 <!-- PHILOSOPHY ─────────────────────────────────────────── -->
-<section class="px-6 py-10 border-t border-zinc-900">
+<section class="px-4 sm:px-6 py-10 border-t border-zinc-900">
   <div class="max-w-5xl mx-auto">
     <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-3">
       <span class="text-green-600">──</span>
       <span>$ cat philosophy.md</span>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {[
         {
           title: 'automate everything',
@@ -184,7 +184,7 @@ const experience = [
           body: "Systems will fail. The goal isn't zero failures — it's fast detection, fast rollback, fast recovery. Build for resilience, not perfection.",
         },
       ].map(card => (
-        <div class="border border-zinc-800 p-5 hover:border-zinc-700 transition-colors">
+        <div class="glass-card p-5 rounded-xl" data-card>
           <div class="font-mono text-xs text-green-600 mb-3">▸ {card.title}</div>
           <p class="font-mono text-xs text-zinc-500 leading-relaxed">{card.body}</p>
         </div>

@@ -1,6 +1,6 @@
 /**
  * theme.js
- * 1. Dark (green) ↔ Amber (phosphor CRT) toggle
+ * 1. Dark ↔ Light mode toggle
  * 2. Lofi music toggle (loops /assets/lofi.mp3)
  */
 
@@ -9,19 +9,23 @@ const SOUND_KEY = 'sharriy-sound';
 
 // ── Theme ──────────────────────────────────────────────────
 function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
   localStorage.setItem(THEME_KEY, theme);
 
   const btn = document.getElementById('theme-toggle');
-  if (btn) btn.textContent = theme === 'amber' ? '[green]' : '[amber]';
+  if (btn) btn.textContent = theme === 'light' ? '[dark]' : '[light]';
 
   // Notify Three.js canvas (if on homepage)
   document.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
 }
 
 function toggleTheme() {
-  const cur = document.documentElement.getAttribute('data-theme') || 'dark';
-  applyTheme(cur === 'amber' ? 'dark' : 'amber');
+  const cur = document.documentElement.getAttribute('data-theme') ?? 'dark';
+  applyTheme(cur === 'light' ? 'dark' : 'light');
 }
 
 // ── Lofi Music ─────────────────────────────────────────────
@@ -50,10 +54,11 @@ function toggleSound() {
 
 // ── Init ───────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  // Restore saved theme
-  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+  // Restore saved theme (default: dark)
+  const saved = localStorage.getItem(THEME_KEY) ?? 'dark';
+  applyTheme(saved);
 
-  // Set initial sound label based on saved pref
+  // Restore sound label
   const savedSound = localStorage.getItem(SOUND_KEY);
   const sBtn = document.getElementById('sound-toggle');
   if (sBtn) sBtn.textContent = savedSound === 'on' ? '[♪ on]' : '[♪ off]';
