@@ -51,11 +51,117 @@ body::after {
   100% { transform: scale(1)    rotate(0deg);  }
 }
 
+/* ── Pulse animations ─────────────────────────── */
+/* Sonar ping — expands outward and fades */
+@keyframes pulse-ping {
+  0%   { transform: scale(1);   opacity: 0.75; }
+  100% { transform: scale(2.8); opacity: 0;    }
+}
+/* Skill bar breathing glow */
+@keyframes pulse-bar-glow {
+  0%, 100% { box-shadow: 0 0 4px rgba(34,197,94,0.4); }
+  50%       { box-shadow: 0 0 12px rgba(34,197,94,0.85), 0 0 22px rgba(34,197,94,0.35); }
+}
+/* CTA ring expansion */
+@keyframes pulse-ring-out {
+  0%   { transform: scale(1);    opacity: 0.5; }
+  100% { transform: scale(1.25); opacity: 0;   }
+}
+/* Terminal dot heartbeat */
+@keyframes pulse-terminal {
+  0%, 100% { opacity: 0.8; box-shadow: 0 0 3px rgba(34,197,94,0.4); }
+  50%       { opacity: 1;   box-shadow: 0 0 9px rgba(34,197,94,0.9); }
+}
+
+/* Timeline spine draw-in */
+.timeline-spine-fill {
+  background: linear-gradient(to bottom, rgba(34,197,94,0.85), rgba(34,197,94,0.2));
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.timeline-spine-fill.drawn {
+  transform: scaleY(1);
+}
+
+/* Timeline dot sonar ping */
+.timeline-dot-ping {
+  animation: pulse-ping 2.2s ease-out infinite;
+}
+
+[data-theme="light"] .timeline-spine-fill {
+  background: linear-gradient(to bottom, rgba(22,163,74,0.8), rgba(22,163,74,0.15));
+}
+
 /* ── Utility ───────────────────────────────────── */
 .animate-bounce-slow { animation: bounce-slow 2.2s infinite; }
 .flicker             { animation: flicker 8s ease-in-out infinite; }
 .fade-up             { animation: fadeSlideUp 0.6s ease forwards; }
 .btn-celebrate       { animation: celebrate 0.55s cubic-bezier(0.22,1,0.36,1) forwards; }
+.pulse-glow          { animation: pulse-bar-glow 2.5s ease-in-out infinite; }
+.pulse-terminal-dot  { animation: pulse-terminal 2.2s ease-in-out infinite; }
+
+/* Live "online" status dot (hero) */
+.live-dot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+}
+.live-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.65);
+  animation: pulse-ping 1.9s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.live-dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.7);
+}
+
+/* CTA button pulse rings wrapper */
+.pulse-rings {
+  position: relative;
+  display: inline-block;
+}
+.pulse-rings::before,
+.pulse-rings::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 1.1rem; /* matches rounded-2xl */
+  border: 2px solid rgba(34, 197, 94, 0.55);
+  animation: pulse-ring-out 2.4s ease-out infinite;
+  pointer-events: none;
+}
+.pulse-rings::after {
+  animation-delay: 1.2s;
+}
+
+/* Light theme: keep pulse colours coherent */
+[data-theme="light"] .live-dot::before { background: rgba(22, 163, 74, 0.5); }
+[data-theme="light"] .live-dot::after  { background: #16a34a; box-shadow: 0 0 6px rgba(22,163,74,0.5); }
+[data-theme="light"] .pulse-rings::before,
+[data-theme="light"] .pulse-rings::after { border-color: rgba(22, 163, 74, 0.5); }
+[data-theme="light"] .pulse-glow {
+  animation-name: pulse-bar-glow-light;
+}
+@keyframes pulse-bar-glow-light {
+  0%, 100% { box-shadow: 0 0 4px rgba(22,163,74,0.35); }
+  50%       { box-shadow: 0 0 12px rgba(22,163,74,0.7), 0 0 22px rgba(22,163,74,0.25); }
+}
 
 /* Block cursor */
 .cursor-blink {
@@ -286,4 +392,102 @@ div:focus-within > .copy-btn { opacity: 1; }
 [data-theme="light"] .bg-green-500 { background-color: #16a34a !important; }
 [data-theme="light"] .bg-zinc-800  { background-color: #e4e4e7 !important; }
 
+/* ── Nav entrance (one-shot on page load) ──────── */
+@keyframes nav-drop {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+header {
+  animation: nav-drop 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Blog list → arrow nudge ───────────────────── */
+.blog-list-arrow {
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+.blog-card:hover .blog-list-arrow {
+  transform: translateX(6px);
+}
+
+/* ── Tools badge stagger ───────────────────────── */
+.tools-badge {
+  opacity: 0;
+  transform: translateY(7px);
+  transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tools-badge.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Light theme nav stays legible */
+[data-theme="light"] header {
+  animation: nav-drop 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 html { scroll-behavior: smooth; }
+
+/* ── Android Greeter ─────────────────────────────── */
+#android-greeter {
+  position: fixed;
+  right: 0;
+  bottom: 60px;
+  z-index: 60;
+  pointer-events: none;
+  transform: translateX(115%);
+  animation: android-slide 7s cubic-bezier(0.34, 1.2, 0.64, 1) 2s forwards;
+}
+
+#android-greeter img {
+  display: block;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+}
+
+#android-bubble {
+  position: absolute;
+  right: 155px;
+  top: 18px;
+  background: #ffffff;
+  color: #18181b;
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 8px 18px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  opacity: 0;
+  animation: android-bubble-anim 7s 2s forwards;
+}
+#android-bubble::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 11px solid #ffffff;
+}
+
+@keyframes android-slide {
+  0%         { transform: translateX(115%); }
+  20%, 80%   { transform: translateX(5%);  }
+  100%       { transform: translateX(115%); }
+}
+
+@keyframes android-bubble-anim {
+  0%, 18%   { opacity: 0; transform: scale(0.75) translateY(6px); }
+  28%, 70%  { opacity: 1; transform: scale(1)    translateY(0);   }
+  82%, 100% { opacity: 0; transform: scale(0.75) translateY(6px); }
+}
+
+[data-theme="light"] #android-bubble        { background: #18181b; color: #f4f4f5; }
+[data-theme="light"] #android-bubble::after { border-left-color: #18181b; }
+
+@media (max-width: 640px) {
+  #android-greeter img { width: 120px; height: auto; }
+  #android-bubble { font-size: 12px; right: 118px; top: 14px; padding: 6px 14px; }
+}

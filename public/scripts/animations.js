@@ -7,6 +7,11 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── AOS INIT ──────────────────────────────────────────────
+  if (typeof AOS !== 'undefined') {
+    AOS.init({ once: true, duration: 520, easing: 'ease-out-cubic', offset: 60 });
+  }
+
   // ── CARD ENTRANCE ─────────────────────────────────────────
   const cards = document.querySelectorAll('[data-card]');
 
@@ -68,6 +73,24 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     skillObserver.observe(skillsGrid);
+  }
+
+  // ── TOOLS BADGES (about page) ─────────────────────────────
+  const toolsGrid = document.querySelector('[data-tools-grid]');
+
+  if (toolsGrid) {
+    const badges = toolsGrid.querySelectorAll('.tools-badge');
+    const toolsObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        badges.forEach((badge, i) => {
+          setTimeout(() => badge.classList.add('visible'), i * 42);
+        });
+        toolsObserver.disconnect();
+      },
+      { threshold: 0.15 }
+    );
+    toolsObserver.observe(toolsGrid);
   }
 
 });

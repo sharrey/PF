@@ -38,7 +38,8 @@ const experience = [
 
 <!-- HEADER ─────────────────────────────────────────────── -->
 <section class="px-4 sm:px-6 pt-10 pb-8 max-w-5xl mx-auto">
-  <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-2 flex-wrap">
+  <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-2 flex-wrap" data-aos="fade-right">
+    <span class="live-dot"></span>
     <span class="text-green-600">sharriy@devops</span><span>:</span><span class="text-blue-400">~</span><span>$</span>
     <span class="text-zinc-500">cat about.txt</span>
   </div>
@@ -47,10 +48,10 @@ const experience = [
 
     <!-- Left: intro -->
     <div>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6" data-aos="fade-up" data-aos-delay="60">
         sharriy<span class="text-green-400">_</span>
       </h1>
-      <div class="space-y-4 font-mono text-sm text-zinc-400 leading-relaxed">
+      <div class="space-y-4 font-mono text-sm text-zinc-400 leading-relaxed" data-aos="fade-up" data-aos-delay="130">
         <p>
           DevOps engineer. I make software ship faster and infrastructure break less.
         </p>
@@ -85,7 +86,7 @@ const experience = [
     </div>
 
     <!-- Right: quick stats -->
-    <div class="glass-card p-6 rounded-xl font-mono self-start">
+    <div class="glass-card p-6 rounded-xl font-mono self-start" data-aos="fade-up" data-aos-delay="80">
       <div class="text-xs text-zinc-600 mb-4">$ kubectl describe sharriy</div>
       <div class="space-y-3 text-xs">
         {[
@@ -111,13 +112,13 @@ const experience = [
 <!-- TOOLS ──────────────────────────────────────────────── -->
 <section class="px-4 sm:px-6 py-8 border-t border-zinc-900">
   <div class="max-w-5xl mx-auto">
-    <div class="font-mono text-xs text-zinc-600 mb-5 flex items-center gap-3">
+    <div class="font-mono text-xs text-zinc-600 mb-5 flex items-center gap-3" data-aos="fade-right">
       <span class="text-green-600">──</span>
       <span>$ which tools</span>
     </div>
-    <div class="flex flex-wrap gap-2">
+    <div class="flex flex-wrap gap-2" data-tools-grid>
       {tools.map(tool => (
-        <span class="font-mono text-xs border border-zinc-800 text-zinc-400 px-3 py-1.5 rounded-lg hover:border-green-800 hover:text-green-400 transition-colors duration-100 cursor-default glass-card">
+        <span class="tools-badge font-mono text-xs border border-zinc-800 text-zinc-400 px-3 py-1.5 rounded-lg hover:border-green-800 hover:text-green-400 transition-colors duration-100 cursor-default glass-card">
           {tool}
         </span>
       ))}
@@ -128,21 +129,25 @@ const experience = [
 <!-- EXPERIENCE ─────────────────────────────────────────── -->
 <section class="px-4 sm:px-6 py-8 border-t border-zinc-900">
   <div class="max-w-5xl mx-auto">
-    <div class="font-mono text-xs text-zinc-600 mb-6 flex items-center gap-3">
+    <div class="font-mono text-xs text-zinc-600 mb-6 flex items-center gap-3" data-aos="fade-right">
       <span class="text-green-600">──</span>
       <span>$ git log --oneline --career</span>
     </div>
 
     <div class="relative">
-      <!-- timeline spine -->
+      <!-- timeline spine (dark base) -->
       <div class="absolute left-0 top-2 bottom-2 w-px bg-zinc-800 hidden md:block"></div>
+      <!-- timeline spine (green draw-in overlay) -->
+      <div class="timeline-spine-fill absolute left-0 top-2 bottom-2 w-px hidden md:block"></div>
 
       <div class="space-y-6">
-        {experience.map((exp) => (
+        {experience.map((exp, idx) => (
           <div class="md:pl-8 relative">
-            <!-- dot -->
-            <div class="absolute left-[-4px] top-1.5 w-2 h-2 rounded-full bg-green-500 hidden md:block"
-              style="box-shadow: 0 0 6px rgba(34,197,94,0.5);"></div>
+            <!-- pulsing dot -->
+            <span class="absolute left-[-4px] top-1.5 hidden md:block" style="width:8px;height:8px;">
+              <span class="timeline-dot-ping absolute inset-0 rounded-full bg-green-500" style={`animation-delay:${idx * 0.4}s; opacity:0.65;`}></span>
+              <span class="absolute inset-0 rounded-full bg-green-500 z-10" style="box-shadow: 0 0 7px rgba(34,197,94,0.7);"></span>
+            </span>
 
             <div class="glass-card p-5 rounded-xl" data-card>
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
@@ -164,7 +169,7 @@ const experience = [
 <!-- PHILOSOPHY ─────────────────────────────────────────── -->
 <section class="px-4 sm:px-6 py-10 border-t border-zinc-900">
   <div class="max-w-5xl mx-auto">
-    <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-3">
+    <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-3" data-aos="fade-right">
       <span class="text-green-600">──</span>
       <span>$ cat philosophy.md</span>
     </div>
@@ -194,3 +199,22 @@ const experience = [
 </section>
 
 </Mainlayout>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const fill = document.querySelector('.timeline-spine-fill');
+  if (!fill) return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        fill.classList.add('drawn');
+        observer.disconnect();
+      }
+    },
+    { threshold: 0.05, rootMargin: '0px 0px -60px 0px' }
+  );
+
+  observer.observe(fill.parentElement);
+});
+</script>

@@ -18,15 +18,15 @@ const colorMap = {
 
 <!-- HEADER ─────────────────────────────────────────────── -->
 <section class="px-4 sm:px-6 pt-10 pb-6 max-w-5xl mx-auto">
-  <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-2 flex-wrap">
+  <div class="font-mono text-xs text-zinc-600 mb-8 flex items-center gap-2 flex-wrap" data-aos="fade-right">
     <span class="text-green-600">sharriy@devops</span><span>:</span><span class="text-blue-400">~</span><span>$</span>
     <span class="text-zinc-500">ls -la ./blog/</span>
   </div>
 
-  <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3">
+  <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3" data-aos="fade-up" data-aos-delay="60">
     /blog<span class="text-green-400 flicker">_</span>
   </h1>
-  <p class="font-mono text-xs sm:text-sm text-zinc-600 mb-2">
+  <p class="font-mono text-xs sm:text-sm text-zinc-600 mb-2" data-aos="fade-up" data-aos-delay="120">
     {posts.length} posts &nbsp;·&nbsp; DevOps, Cloud, Containers, and the things that keep me up at night.
   </p>
 </section>
@@ -48,7 +48,7 @@ const colorMap = {
     {posts.map((post, i) => {
       const colors = colorMap[post.categoryColor] ?? 'text-zinc-400 border-zinc-800';
       return (
-        <a href={`/blog/${post.slug}`} class="blog-card glass-card p-5 sm:p-6 rounded-xl flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-5">
+        <a href={`/blog/${post.slug}`} class="blog-card glass-card p-5 sm:p-6 rounded-xl flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-5" data-card>
 
           <!-- Index number -->
           <div class="font-mono text-xl sm:text-2xl text-zinc-800 shrink-0 hidden sm:block" style="min-width: 2rem;">
@@ -71,7 +71,7 @@ const colorMap = {
           </div>
 
           <!-- Arrow -->
-          <div class="font-mono text-zinc-700 shrink-0 self-center text-lg hidden sm:block">
+          <div class="font-mono text-zinc-700 shrink-0 self-center text-lg hidden sm:block blog-list-arrow">
             →
           </div>
 
