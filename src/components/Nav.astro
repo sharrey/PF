@@ -35,6 +35,9 @@ const pathname = Astro.url.pathname;
       <a href="/blog" class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname.startsWith('/blog') ? 'text-green-400' : ''}`}>
         ~/blog
       </a>
+      <a href="/security" class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 flex items-center gap-1 ${pathname.startsWith('/security') ? 'text-red-400' : ''}`}>
+        <span class="text-red-600 text-xs">⚠</span>~/security
+      </a>
       <a href="https://github.com/sharrey" target="_blank" rel="noopener"
         class="nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 flex items-center gap-1">
         <img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg" class="w-3.5 h-3.5 opacity-60" alt="" />
@@ -77,6 +80,9 @@ const pathname = Astro.url.pathname;
       </a>
       <a href="/blog" class={`nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm ${pathname.startsWith('/blog') ? 'text-green-400' : ''}`}>
         ~/blog
+      </a>
+      <a href="/security" class={`nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm flex items-center gap-2 ${pathname.startsWith('/security') ? 'text-red-400' : ''}`}>
+        <span class="text-red-600">⚠</span>~/security
       </a>
       <a href="https://github.com/sharrey" target="_blank" rel="noopener"
         class="nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm flex items-center gap-2">

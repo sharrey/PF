@@ -1,0 +1,131 @@
+export type Severity = 'critical' | 'high' | 'medium' | 'low';
+
+export interface Vuln {
+  cve: string;
+  title: string;
+  severity: Severity;
+  cvss: number;
+  component: string;
+  affected: string;
+  fixed: string;
+  date: string;
+  summary: string;
+  impact: string;
+  fix: string;
+  tags: string[];
+}
+
+export const vulns: Vuln[] = [
+  {
+    cve: 'CVE-2025-1974',
+    title: 'IngressNightmare — Remote Code Execution in ingress-nginx',
+    severity: 'critical',
+    cvss: 9.8,
+    component: 'ingress-nginx',
+    affected: '< 1.11.5, < 1.12.1',
+    fixed: '1.11.5 / 1.12.1',
+    date: '2025-03-24',
+    summary: 'A critical RCE vulnerability in the ingress-nginx admission controller allows an unauthenticated attacker on the pod network to inject arbitrary nginx configuration, leading to full cluster compromise.',
+    impact: 'Unauthenticated RCE with access to all Secrets in the cluster. Any pod that can reach the admission webhook (port 8443) can exploit this. Approximately 40% of public Kubernetes clusters were exposed.',
+    fix: 'Upgrade immediately to 1.11.5 or 1.12.1. If you cannot upgrade, disable the admission webhook or restrict network access to it via NetworkPolicy.',
+    tags: ['kubernetes', 'ingress', 'rce', 'cloud'],
+  },
+  {
+    cve: 'CVE-2025-29927',
+    title: 'Next.js Middleware Authorization Bypass',
+    severity: 'critical',
+    cvss: 9.1,
+    component: 'Next.js',
+    affected: '< 15.2.3, < 14.2.25',
+    fixed: '15.2.3 / 14.2.25',
+    date: '2025-03-21',
+    summary: 'An attacker can bypass Next.js middleware entirely by setting the x-middleware-subrequest header, skipping all authentication, authorization, and redirect logic defined in middleware.ts.',
+    impact: 'Complete bypass of any auth gate implemented in Next.js middleware. Admin panels, protected routes, and paywalls are all exposed. Only affects self-hosted deployments — Vercel patched at the edge.',
+    fix: 'Upgrade to 15.2.3 / 14.2.25. Strip the x-middleware-subrequest header at your reverse proxy (nginx/Cloudflare) as an interim measure.',
+    tags: ['nodejs', 'web', 'auth-bypass', 'middleware'],
+  },
+  {
+    cve: 'CVE-2025-27152',
+    title: 'Axios SSRF via Absolute URL Override',
+    severity: 'high',
+    cvss: 8.6,
+    component: 'axios',
+    affected: '>= 1.0.0, < 1.8.2',
+    fixed: '1.8.2',
+    date: '2025-01-31',
+    summary: 'When axios is configured with a baseURL, passing an absolute URL as the request path overrides the baseURL entirely, bypassing any allowlist or SSRF protection that depends on the base URL being respected.',
+    impact: 'Server-Side Request Forgery in any Node.js app that uses axios with a baseURL as a security boundary. Attackers can force requests to internal metadata endpoints (AWS IMDSv1, GCP metadata) or internal services.',
+    fix: 'Upgrade to axios 1.8.2. Alternatively, validate the final resolved URL before making requests rather than relying on baseURL as a boundary.',
+    tags: ['nodejs', 'ssrf', 'http-client'],
+  },
+  {
+    cve: 'CVE-2025-30208',
+    title: 'Vite Arbitrary File Read via Path Traversal',
+    severity: 'high',
+    cvss: 7.5,
+    component: 'Vite',
+    affected: '< 6.2.3, < 6.1.2, < 5.4.15',
+    fixed: '6.2.3 / 6.1.2 / 5.4.15',
+    date: '2025-03-26',
+    summary: 'The Vite dev server allows arbitrary file reads outside the project root when specific query parameters with null bytes or URL encoding are appended to a request, bypassing the fs.deny filter.',
+    impact: 'Any file readable by the process can be exfiltrated — .env files, private keys, /etc/passwd. Only affects machines running vite dev with the server exposed to untrusted networks.',
+    fix: 'Upgrade to the patched version. Never expose vite dev to untrusted networks — use --host 127.0.0.1 in dev and never run the dev server in production.',
+    tags: ['frontend', 'build-tool', 'path-traversal', 'devops'],
+  },
+  {
+    cve: 'CVE-2025-22150',
+    title: 'undici Insufficient Entropy in Proxy-Authorization',
+    severity: 'medium',
+    cvss: 6.8,
+    component: 'undici (Node.js fetch)',
+    affected: '< 6.21.1',
+    fixed: '6.21.1',
+    date: '2025-01-20',
+    summary: 'undici uses Math.random() to generate boundary strings for multipart form data, making them predictable. Combined with a retry scenario, an attacker may be able to intercept Proxy-Authorization headers.',
+    impact: 'Credential leakage via proxy authentication on Node.js 18+ (undici is the built-in fetch). Affects any service using node fetch through an HTTP proxy with credentials.',
+    fix: 'Update Node.js to a patched release or upgrade undici to 6.21.1 directly.',
+    tags: ['nodejs', 'crypto', 'http'],
+  },
+  {
+    cve: 'CVE-2025-21605',
+    title: 'Redis Unauthenticated DoS via Output Buffer',
+    severity: 'high',
+    cvss: 7.5,
+    component: 'Redis',
+    affected: '< 6.2.18, < 7.2.8, < 7.4.3',
+    fixed: '6.2.18 / 7.2.8 / 7.4.3',
+    date: '2025-04-07',
+    summary: 'An unauthenticated attacker can cause unbounded memory growth in Redis by flooding the output buffer, leading to an OOM kill and denial of service without authentication.',
+    impact: 'Full DoS on any Redis instance exposed without proper network restrictions — no auth required. Critical for any deployment where Redis is reachable from untrusted networks.',
+    fix: 'Upgrade immediately. Apply network-level controls to restrict Redis access to trusted clients only. Enable requirepass as defense-in-depth.',
+    tags: ['database', 'cache', 'dos', 'infrastructure'],
+  },
+  {
+    cve: 'CVE-2025-24813',
+    title: 'Apache Tomcat Partial PUT RCE',
+    severity: 'critical',
+    cvss: 9.8,
+    component: 'Apache Tomcat',
+    affected: '11.0.0-M1–11.0.2, 10.1.0-M1–10.1.34, 9.0.0-M1–9.0.98',
+    fixed: '11.0.3 / 10.1.35 / 9.0.99',
+    date: '2025-03-10',
+    summary: 'A partial PUT request causes Tomcat to write a temporary file with a predictable path. If the default servlet is enabled for write and the server has deserialization gadgets on the classpath, this enables unauthenticated RCE.',
+    impact: 'Unauthenticated RCE on Tomcat servers with partial PUT enabled and deserialization gadgets on the classpath. Default servlet write is not enabled by default but is common in enterprise deployments.',
+    fix: 'Upgrade to the fixed versions. Disable partial PUT support and the default servlet write capability if not required.',
+    tags: ['java', 'rce', 'web-server'],
+  },
+  {
+    cve: 'CVE-2024-55591',
+    title: 'FortiOS Authentication Bypass — Exploited in the Wild',
+    severity: 'critical',
+    cvss: 9.6,
+    component: 'FortiOS / FortiProxy',
+    affected: 'FortiOS 7.0.0–7.0.16, FortiProxy 7.0–7.2',
+    fixed: 'FortiOS 7.0.17+',
+    date: '2025-01-14',
+    summary: 'An authentication bypass in the Node.js websocket module allows an unauthenticated remote attacker to gain super-admin privileges via crafted requests to the management interface. Actively exploited in the wild.',
+    impact: 'Full admin takeover of FortiGate firewalls and FortiProxy. CISA added to KEV catalog. Used in targeted attacks against enterprise networks to pivot internally.',
+    fix: 'Patch immediately. Disable management interface access from untrusted networks. Review admin accounts for unauthorized entries.',
+    tags: ['network', 'firewall', 'auth-bypass', 'exploited-in-wild'],
+  },
+];

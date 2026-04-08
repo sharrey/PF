@@ -241,11 +241,28 @@ const categoryColor: Record<string, string> = {
 
 <!-- ANDROID GREETER ─────────────────────────────────────── -->
 <div id="android-greeter" aria-hidden="true">
-  <div id="android-bubble">Hi! 👋</div>
-  <img src="/images/logo.png" alt="Android robot waving" width="160" height="190" />
+  <div id="android-bubble">Hi! 👋 click me</div>
+  <img id="android-img" src="/images/logo.png" alt="Chat with sharriy's AI" width="160" height="190" style="pointer-events:auto;cursor:pointer;" />
+</div>
+
+<!-- CHAT WIDGET ─────────────────────────────────────────── -->
+<div id="chat-widget" aria-hidden="true">
+  <div id="chat-header">
+    <span class="chat-dot"></span>
+    <span id="chat-title">sharriy.ai</span>
+    <button id="chat-close" aria-label="Close chat">✕</button>
+  </div>
+  <div id="chat-messages">
+    <div class="msg msg-ai">Hey 👋 Ask me anything about sharriy's stack, projects, or blog.</div>
+  </div>
+  <form id="chat-form">
+    <input id="chat-input" type="text" placeholder="ask something..." autocomplete="off" maxlength="200" />
+    <button type="submit" id="chat-send">⏎</button>
+  </form>
 </div>
 
 </Mainlayout>
 
 <!-- Three.js particle network (only on this page) -->
 <script type="module" src="/scripts/hero-three.js"></script>
+<script defer src="/scripts/chat.js"></script>
