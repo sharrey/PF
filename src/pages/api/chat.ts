@@ -19,7 +19,7 @@ Rules:
 - If asked something totally off-topic, gently redirect back to sharriy's work`;
 
 export const POST: APIRoute = async ({ request }) => {
-  const apiKey = process.env.OPENROUTER_API_KEY;
+  const apiKey = process.env.OPENROUTER_API_KEY ?? import.meta.env.OPENROUTER_API_KEY;
   if (!apiKey) {
     return new Response(JSON.stringify({ error: 'API key not configured' }), {
       status: 500,
@@ -50,7 +50,9 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+  let resp: Response;
+  try {
+    resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${apiKey}`,
@@ -66,7 +68,14 @@ export const POST: APIRoute = async ({ request }) => {
         ...sanitized,
       ],
     }),
-  });
+    });
+  } catch (err) {
+    console.error('[chat] fetch failed', err);
+    return new Response(JSON.stringify({ error: 'Failed to reach OpenRouter' }), {
+      status: 502,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
   if (!resp.ok) {
     const errBody = await resp.text();
