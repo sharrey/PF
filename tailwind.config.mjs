@@ -4,8 +4,8 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['"Pixelify Sans"', 'monospace'],
-				mono: ['"Pixelify Sans"', 'monospace'],
+				sans: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+				mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
 			},
 			animation: {
 				'bounce-slow': 'bounce 2s infinite',
