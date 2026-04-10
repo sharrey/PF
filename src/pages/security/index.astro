@@ -3,10 +3,9 @@ import Mainlayout from "../../Layout/Mainlayout.astro";
 import { vulns } from "../../data/vulns";
 import type { Severity } from "../../data/vulns";
 
-const sorted = [...vulns].sort((a, b) => {
-  const order: Record<Severity, number> = { critical: 0, high: 1, medium: 2, low: 3 };
-  return order[a.severity] - order[b.severity] || b.cvss - a.cvss;
-});
+const sorted = [...vulns].sort((a, b) =>
+  new Date(b.date).getTime() - new Date(a.date).getTime()
+);
 
 const severityStyle: Record<Severity, string> = {
   critical: 'text-red-400 border-red-900 bg-red-950/30',
