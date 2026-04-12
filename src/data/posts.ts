@@ -12,6 +12,7 @@ export interface Post {
   categoryColor: 'green' | 'amber' | 'blue' | 'red';
   excerpt: string;
   readTime: string;
+  diff: string[];
   sections: PostSection[];
 }
 
@@ -24,6 +25,11 @@ export const posts: Post[] = [
     categoryColor: 'green',
     excerpt: 'Stop memorizing kubectl commands. Learn why the pod actually crashed at 3AM.',
     readTime: '8 min read',
+    diff: [
+      'K8s = declarative state machine, not a command runner',
+      'CrashLoopBackOff → describe → logs → exec, always',
+      'OOMKilled = memory limit hit, set requests/limits on everything',
+    ],
     sections: [
       {
         body: [
@@ -70,6 +76,11 @@ kubectl exec -it <pod-name> -n <namespace> -- /bin/sh`,
     categoryColor: 'amber',
     excerpt: "Your 2GB Docker image is a problem. Here's how to slim it down to 50MB.",
     readTime: '6 min read',
+    diff: [
+      'Build in one stage, ship only the output in another',
+      '1.2 GB naive image → 85 MB with multi-stage',
+      'Distroless = no shell = smaller attack surface',
+    ],
     sections: [
       {
         body: [
@@ -130,6 +141,11 @@ CMD ["node", "dist/index.js"]
     categoryColor: 'blue',
     excerpt: 'From zero to automated deployments. No Jenkins required.',
     readTime: '10 min read',
+    diff: [
+      'Workflows live in .github/workflows/ as YAML files',
+      'Never tag prod images :latest — use the commit SHA',
+      'Kubeconfig goes in GitHub Secrets, never in the YAML',
+    ],
     sections: [
       {
         body: [
@@ -203,6 +219,11 @@ jobs:
     categoryColor: 'amber',
     excerpt: "S3 is no longer just object storage. Mountpoint, Express One Zone, S3 Tables, and S3 Metadata have turned it into something far more powerful — here's what changed and why it matters.",
     readTime: '12 min read',
+    diff: [
+      'Mountpoint = mount an S3 bucket as a local POSIX path',
+      'Express One Zone = 10× faster, single-AZ, no versioning',
+      'S3 Tables = managed Iceberg, no Glue catalog to babysit',
+    ],
     sections: [
       {
         body: [
@@ -345,6 +366,11 @@ df.writeTo("s3tablesbucket.analytics.events").append()`,
     categoryColor: 'blue',
     excerpt: 'Claude on Bedrock is now a live security analyst. Threat detection, IR automation, and vulnerability research will never look the same.',
     readTime: '11 min read',
+    diff: [
+      'Claude on Bedrock = AI analyst inside your VPC, data stays put',
+      '200K context = full 24h CloudTrail log in a single call',
+      'Prompt injection via log data is a real new attack vector',
+    ],
     sections: [
       {
         body: [
@@ -460,6 +486,11 @@ Finding: {json.dumps(finding, indent=2)}"""
     categoryColor: 'red',
     excerpt: 'Local state files are ticking time bombs. Here is the right way to manage Terraform state.',
     readTime: '7 min read',
+    diff: [
+      'Local state = ticking time bomb, migrate to S3 + DynamoDB',
+      'DynamoDB lock prevents two people applying at once',
+      'prevent_destroy = true on anything you cannot recreate',
+    ],
     sections: [
       {
         body: [

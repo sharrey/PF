@@ -392,6 +392,20 @@ div:focus-within > .copy-btn { opacity: 1; }
 [data-theme="light"] .bg-green-500 { background-color: #16a34a !important; }
 [data-theme="light"] .bg-zinc-800  { background-color: #e4e4e7 !important; }
 
+/* ── Glitch / chromatic aberration ────────────── */
+@keyframes glitch-pop {
+  0%   { text-shadow: -4px 0 #ff3366, 4px 0 #00e5ff; transform: translate(-3px, 0)  skewX(-2deg); }
+  15%  { text-shadow:  4px 0 #ff3366,-4px 0 #00e5ff; transform: translate( 3px, 0)  skewX( 2deg); }
+  30%  { text-shadow: -3px 0 #ff3366, 5px 0 #00e5ff; transform: translate( 0,   1px) skewX(-1deg); }
+  45%  { text-shadow:  5px 0 #ff3366,-3px 0 #00e5ff; transform: translate(-2px,-1px) skewX( 1deg); }
+  60%  { text-shadow: -2px 0 #ff3366, 2px 0 #00e5ff; transform: translate( 1px, 0); }
+  80%  { text-shadow:  2px 0 #ff3366,-2px 0 #00e5ff; transform: translate(-1px, 1px); }
+  100% { text-shadow: none;                           transform: translate(0); }
+}
+.glitch-active {
+  animation: glitch-pop 0.35s steps(1) forwards !important;
+}
+
 /* ── Nav entrance (one-shot on page load) ──────── */
 @keyframes nav-drop {
   from { transform: translateY(-100%); opacity: 0; }

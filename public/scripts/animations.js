@@ -5,6 +5,15 @@
  * – Skill counters: count-up from 0 → target %
  */
 
+// ── Glitch effect on hero name ──────────────────────���──────
+(function scheduleGlitch() {
+  const el = document.querySelector('.glitch');
+  if (!el) return;
+  el.classList.add('glitch-active');
+  el.addEventListener('animationend', () => el.classList.remove('glitch-active'), { once: true });
+  setTimeout(scheduleGlitch, 2000 + Math.random() * 3500);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ── AOS INIT ──────────────────────────────────────────────

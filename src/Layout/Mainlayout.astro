@@ -19,6 +19,10 @@ const { title, seoTitle, seoDesc } = Astro.props;
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+
+    <!-- Boot sequence (first visit only, runs immediately) -->
+    <script src="/scripts/boot.js" is:inline></script>
 
     <!-- Local Scripts -->
     <script src="/scripts/theme.js" defer></script>
@@ -26,7 +30,8 @@ const { title, seoTitle, seoDesc } = Astro.props;
     <script src="/scripts/terminal.js" defer></script>
     <script src="/scripts/animations.js" defer></script>
     <script src="/scripts/copy-code.js" defer></script>
-    <script src="/scripts/confetti.js" type="module"></script>
+    <script src="/scripts/blog-diff.js" defer></script>
+    <script src="/scripts/confetti.js" defer></script>
   </head>
 
   <body class="bg-black text-white flex flex-col font-sans" style="min-height: 100vh;">
