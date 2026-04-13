@@ -4,7 +4,7 @@
   const form     = document.getElementById('chat-form');
   const input    = document.getElementById('chat-input');
   const closeBtn = document.getElementById('chat-close');
-  const trigger  = document.getElementById('android-img');
+  const trigger  = document.getElementById('chat-trigger');
 
   if (!widget || !trigger) return;
 

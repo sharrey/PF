@@ -22,15 +22,8 @@ const categoryColor: Record<string, string> = {
 <!-- HERO ─────────────────────────────────────────────────── -->
 <section class="relative min-h-screen overflow-hidden">
 
-  <!-- Three.js canvas (behind content) -->
-  <canvas
-    id="hero-canvas"
-    class="absolute inset-0 w-full h-full pointer-events-none"
-    style="z-index:0;"
-  ></canvas>
-
   <!-- Vertically centred content -->
-  <div class="relative flex flex-col justify-center px-4 sm:px-6 py-20 max-w-5xl mx-auto min-h-screen" style="z-index:1;">
+  <div class="flex flex-col justify-center px-4 sm:px-6 py-20 max-w-5xl mx-auto min-h-screen">
 
     <div class="font-mono text-xs text-zinc-600 mb-5 flex items-center gap-2 flex-wrap">
       <span class="live-dot"></span>
@@ -77,7 +70,7 @@ const categoryColor: Record<string, string> = {
   </div>
 
   <!-- Scroll arrow -->
-  <div class="absolute bottom-5 left-1/2 -translate-x-1/2 font-mono text-xs text-zinc-700 animate-bounce-slow" style="z-index:1;">
+  <div class="absolute bottom-5 left-1/2 -translate-x-1/2 font-mono text-xs text-zinc-700 animate-bounce-slow">
     ↓ scroll
   </div>
 </section>
@@ -226,19 +219,6 @@ const categoryColor: Record<string, string> = {
   </div>
 </section>
 
-<!-- HARD TRUTH ───────────────────────────────────────────── -->
-<section class="px-4 sm:px-6 py-8 border-t border-b border-zinc-900">
-  <div class="max-w-5xl mx-auto text-center font-mono">
-    <div class="text-xs text-zinc-700 mb-4">$ cat hardtruth.txt</div>
-    <p class="text-2xl sm:text-3xl md:text-5xl text-white leading-tight mb-3" data-aos="fade-in" data-aos-delay="50">
-      You <span class="text-red-500">CAN'T</span> master DevOps<br class="hidden sm:block" />
-      without <span class="text-green-400">hands-on experience</span>
-    </p>
-    <p class="text-zinc-600 text-xs sm:text-sm mt-3">logs &gt; lectures &nbsp;·&nbsp; break things &nbsp;·&nbsp; fix them faster</p>
-    <div class="mt-4 text-zinc-700 text-xs animate-bounce-slow">↓</div>
-  </div>
-</section>
-
 <!-- BLOG PREVIEW ─────────────────────────────────────────── -->
 <section class="px-4 sm:px-6 pt-8 pb-6">
   <div class="max-w-5xl mx-auto">
@@ -343,37 +323,20 @@ const categoryColor: Record<string, string> = {
 <!-- CTA ──────────────────────────────────────────────────── -->
 <section class="px-4 sm:px-6 py-10 flex flex-col items-center text-center">
   <div class="font-mono text-xs text-zinc-700 mb-6">$ echo "ready to ship?"</div>
-  <div class="pulse-rings" data-aos="fade-right">
-    <button
-      id="confetti-button"
-      class="relative z-10 px-6 sm:px-10 py-4 sm:py-5 text-3xl sm:text-4xl md:text-6xl font-bold bg-green-500 text-black rounded-2xl hover:bg-green-400 active:scale-95 transition-all duration-150 shadow-lg shadow-green-900/30"
-    >
-      LET'S SHIP IT 🚀
-    </button>
-  </div>
+  <button
+    id="confetti-button"
+    data-aos="fade-up"
+    class="px-6 sm:px-10 py-4 sm:py-5 text-3xl sm:text-4xl md:text-6xl font-bold bg-green-500 text-black rounded-2xl hover:bg-green-400 active:scale-95 transition-all duration-150 shadow-lg shadow-green-900/30"
+  >
+    LET'S SHIP IT 🚀
+  </button>
   <p class="font-mono text-xs text-zinc-700 mt-4">warning: may cause uncontrolled deployments</p>
 </section>
 
-<!-- SOCIAL ───────────────────────────────────────────────── -->
-<section class="px-4 sm:px-6 py-6 border-t border-zinc-900">
-  <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-xs">
-    <span class="text-zinc-700">$ find sharriy --on-the-internet</span>
-    <div class="flex items-center gap-5">
-      <a href="https://github.com/sharrey" target="_blank" rel="noopener"
-        class="text-zinc-600 hover:text-green-400 transition-colors flex items-center gap-2">
-        <img src="https://static.cdnlogo.com/logos/g/69/github-icon.svg" class="w-4 h-4 opacity-50" alt="GitHub" />
-        github
-      </a>
-      <span class="text-zinc-800 hidden sm:inline">#RealEngineersUseLogs</span>
-    </div>
-  </div>
-</section>
-
-<!-- ANDROID GREETER ─────────────────────────────────────── -->
-<div id="android-greeter" aria-hidden="true">
-  <div id="android-bubble">Hi! 👋 click me</div>
-  <img id="android-img" src="/images/logo.png" alt="Chat with sharriy's AI" width="160" height="190" style="pointer-events:auto;cursor:pointer;" />
-</div>
+<!-- CHAT TRIGGER ────────────────────────────────────────── -->
+<button id="chat-trigger" aria-label="Open chat with sharriy's AI">
+  <span class="trigger-prompt">▸ </span>sharriy.ai
+</button>
 
 <!-- CHAT WIDGET ─────────────────────────────────────────── -->
 <div id="chat-widget" aria-hidden="true">
@@ -393,6 +356,4 @@ const categoryColor: Record<string, string> = {
 
 </Mainlayout>
 
-<!-- Three.js particle network (only on this page) -->
-<script type="module" src="/scripts/hero-three.js"></script>
 <script defer src="/scripts/chat.js"></script>

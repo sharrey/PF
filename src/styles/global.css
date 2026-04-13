@@ -62,9 +62,6 @@ body::after {
   0%, 100% { box-shadow: 0 0 4px rgba(34,197,94,0.4); }
   50%       { box-shadow: 0 0 12px rgba(34,197,94,0.85), 0 0 22px rgba(34,197,94,0.35); }
 }
-/* CTA ring expansion */
-@keyframes pulse-ring-out {
-  0%   { transform: scale(1);    opacity: 0.5; }
   100% { transform: scale(1.25); opacity: 0;   }
 }
 /* Terminal dot heartbeat */
@@ -131,30 +128,9 @@ body::after {
   box-shadow: 0 0 6px rgba(34, 197, 94, 0.7);
 }
 
-/* CTA button pulse rings wrapper */
-.pulse-rings {
-  position: relative;
-  display: inline-block;
-}
-.pulse-rings::before,
-.pulse-rings::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 1.1rem; /* matches rounded-2xl */
-  border: 2px solid rgba(34, 197, 94, 0.55);
-  animation: pulse-ring-out 2.4s ease-out infinite;
-  pointer-events: none;
-}
-.pulse-rings::after {
-  animation-delay: 1.2s;
-}
-
 /* Light theme: keep pulse colours coherent */
 [data-theme="light"] .live-dot::before { background: rgba(22, 163, 74, 0.5); }
 [data-theme="light"] .live-dot::after  { background: #16a34a; box-shadow: 0 0 6px rgba(22,163,74,0.5); }
-[data-theme="light"] .pulse-rings::before,
-[data-theme="light"] .pulse-rings::after { border-color: rgba(22, 163, 74, 0.5); }
 [data-theme="light"] .pulse-glow {
   animation-name: pulse-bar-glow-light;
 }
@@ -443,7 +419,42 @@ header {
 html { scroll-behavior: smooth; }
 
 /* ── Chat widget ─────────────────────────────────── */
-#android-img:hover { filter: drop-shadow(0 0 12px rgba(34,197,94,0.6)); transition: filter 0.2s ease; }
+/* ── Chat trigger button ────────────────────── */
+#chat-trigger {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 60;
+  background: rgba(10, 10, 10, 0.88);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 8px;
+  padding: 7px 14px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+  font-size: 0.72rem;
+  color: #71717a;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+#chat-trigger:hover {
+  color: #22c55e;
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.1);
+}
+.trigger-prompt { color: #22c55e; }
+
+[data-theme="light"] #chat-trigger {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(22, 163, 74, 0.25);
+  color: #71717a;
+}
+[data-theme="light"] #chat-trigger:hover {
+  color: #16a34a;
+  border-color: rgba(22, 163, 74, 0.5);
+}
+[data-theme="light"] .trigger-prompt { color: #16a34a; }
 
 #chat-widget {
   position: fixed;
@@ -606,66 +617,5 @@ html { scroll-behavior: smooth; }
   #chat-widget { width: calc(100vw - 24px); right: 12px; bottom: 80px; }
 }
 
-/* ── Android Greeter ─────────────────────────────── */
-#android-greeter {
-  position: fixed;
-  right: 0;
-  bottom: 60px;
-  z-index: 60;
-  pointer-events: none;
-  transform: translateX(115%);
-  animation: android-slide 7s cubic-bezier(0.34, 1.2, 0.64, 1) 2s forwards;
-}
-
-#android-greeter img {
-  display: block;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
-}
-
-#android-bubble {
-  position: absolute;
-  right: 155px;
-  top: 18px;
-  background: #ffffff;
-  color: #18181b;
-  font-family: monospace;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  padding: 8px 18px;
-  border-radius: 20px;
-  white-space: nowrap;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  opacity: 0;
-  animation: android-bubble-anim 7s 2s forwards;
-}
-#android-bubble::after {
-  content: '';
-  position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-  border-left: 11px solid #ffffff;
-}
-
-@keyframes android-slide {
-  0%         { transform: translateX(115%); }
-  20%, 80%   { transform: translateX(5%);  }
-  100%       { transform: translateX(115%); }
-}
-
-@keyframes android-bubble-anim {
-  0%, 18%   { opacity: 0; transform: scale(0.75) translateY(6px); }
-  28%, 70%  { opacity: 1; transform: scale(1)    translateY(0);   }
-  82%, 100% { opacity: 0; transform: scale(0.75) translateY(6px); }
-}
-
-[data-theme="light"] #android-bubble        { background: #18181b; color: #f4f4f5; }
-[data-theme="light"] #android-bubble::after { border-left-color: #18181b; }
-
 @media (max-width: 640px) {
-  #android-greeter img { width: 120px; height: auto; }
-  #android-bubble { font-size: 12px; right: 118px; top: 14px; padding: 6px 14px; }
 }
