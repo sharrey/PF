@@ -5,20 +5,34 @@ const tools = [
   'Kubernetes', 'Docker', 'Helm', 'ArgoCD',
   'GitHub Actions', 'Jenkins', 'Terraform', 'Ansible',
   'AWS', 'Azure', 'GCP', 'Linux',
+  'Node.js', 'TypeScript', 'React', 'PostgreSQL',
   'Python', 'Bash', 'Go', 'YAML',
+  'Redis', 'FastAPI', 'REST APIs',
 ];
 
 const experience = [
   {
     role: 'DevOps Engineer',
     company: 'Building in public',
-    period: '2023 → present',
-    desc: 'Automating deployments, managing Kubernetes clusters, designing CI/CD pipelines, writing infrastructure as code.',
+    period: '2024 → present',
+    desc: 'Automating deployments, managing Kubernetes clusters, designing CI/CD pipelines, writing infrastructure as code. Cut AWS costs by ~40% through rightsizing and spot migration.',
+  },
+  {
+    role: 'Fullstack Developer',
+    company: 'ERP & Product Projects',
+    period: '2023 → 2024',
+    desc: 'Built full-stack applications end-to-end — React frontends, Node.js REST APIs, PostgreSQL schemas. Delivered a complete ERP platform and an AI image generation service from zero to production.',
+  },
+  {
+    role: 'Backend Developer',
+    company: 'Node.js APIs & Services',
+    period: '2022 → 2023',
+    desc: 'Designed and shipped Node.js backend services: REST APIs, auth flows, job queues with Redis, async workers. Focused on reliability, performance, and clean API contracts.',
   },
   {
     role: 'Cloud & Infrastructure',
     company: 'Hands-on projects',
-    period: '2022 → 2023',
+    period: '2022',
     desc: 'Multi-cloud architecture on AWS and Azure. IaC with Terraform and Ansible. Container orchestration from scratch.',
   },
   {
@@ -99,8 +113,8 @@ const experience = [
       <div class="space-y-3 text-xs">
         {[
           { label: 'Name',   value: 'sharriy' },
-          { label: 'Role',   value: 'DevOps Engineer' },
-          { label: 'Focus',  value: 'Cloud · Containers · Automation' },
+          { label: 'Role',   value: 'DevOps · Fullstack · Backend' },
+          { label: 'Focus',  value: 'Cloud · Containers · Node.js · Automation' },
           { label: 'Cloud',  value: 'AWS · Azure · GCP' },
           { label: 'OS',     value: 'Linux (always)' },
           { label: 'Editor', value: 'nvim (no shame)' },
