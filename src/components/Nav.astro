@@ -35,7 +35,7 @@ const pathname = Astro.url.pathname;
       <a href="/blog" class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 ${pathname.startsWith('/blog') ? 'text-green-400' : ''}`}>
         ~/blog
       </a>
-      <a href="/#projects" class="nav-link px-3 py-1 rounded-sm hover:bg-zinc-900">
+      <a href="/#projects" onclick="if(location.pathname==='/'){event.preventDefault();document.getElementById('projects')?.scrollIntoView({behavior:'smooth'})}" class="nav-link px-3 py-1 rounded-sm hover:bg-zinc-900">
         ~/projects
       </a>
       <a href="/security" class={`nav-link px-3 py-1 rounded-sm hover:bg-zinc-900 flex items-center gap-1 ${pathname.startsWith('/security') ? 'text-red-400' : ''}`}>
@@ -87,7 +87,7 @@ const pathname = Astro.url.pathname;
       <a href="/blog" class={`nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm ${pathname.startsWith('/blog') ? 'text-green-400' : ''}`}>
         ~/blog
       </a>
-      <a href="/#projects" class="nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm">
+      <a href="/#projects" onclick="if(location.pathname==='/'){event.preventDefault();document.getElementById('projects')?.scrollIntoView({behavior:'smooth'})}" class="nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm">
         ~/projects
       </a>
       <a href="/security" class={`nav-link py-3 px-3 rounded-lg hover:bg-zinc-900/80 text-sm flex items-center gap-2 ${pathname.startsWith('/security') ? 'text-red-400' : ''}`}>

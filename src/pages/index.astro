@@ -41,7 +41,9 @@ const categoryColor: Record<string, string> = {
     </div>
     <div id="typed-strings" class="hidden">
       <p>DevOps Engineer</p>
+      <p>Fullstack Developer</p>
       <p>automating CI/CD pipelines</p>
+      <p>shipping products end-to-end</p>
       <p>containerizing things with Docker &amp; K8s</p>
       <p>breaking prod at 2AM — fixing it by 2:05</p>
       <p>your infrastructure's best friend</p>
@@ -102,7 +104,7 @@ const categoryColor: Record<string, string> = {
       <span>$ cat stack.yaml</span>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-skills>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4" data-skills>
 
       {[
         {
@@ -135,6 +137,15 @@ const categoryColor: Record<string, string> = {
             { name: 'Terraform', pct: 80 },
             { name: 'Ansible',   pct: 72 },
             { name: 'Pulumi',    pct: 50 },
+          ],
+        },
+        {
+          label: 'backend',
+          items: [
+            { name: 'Node.js',     pct: 82 },
+            { name: 'TypeScript',  pct: 78 },
+            { name: 'PostgreSQL',  pct: 74 },
+            { name: 'Redis',       pct: 68 },
           ],
         },
       ].map(group => (
@@ -227,7 +238,7 @@ const categoryColor: Record<string, string> = {
         <span class="text-green-600">──</span>
         <span>$ ls -la ./blog/</span>
       </div>
-      <a href="/blog" class="text-zinc-700 hover:text-green-400 transition-colors">cat all →</a>
+      <a href="/blog" class="font-mono text-xs border border-zinc-800 text-zinc-500 px-3 py-1 rounded-lg hover:border-green-800 hover:text-green-400 transition-colors">cat all → ({posts.length})</a>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -266,8 +277,8 @@ const categoryColor: Record<string, string> = {
           let's work<br /><span class="text-green-400">together_</span>
         </h2>
         <p class="font-mono text-xs text-zinc-500 leading-relaxed max-w-sm mb-6">
-          Open to DevOps roles, freelance infra work, and interesting cloud problems.<br /><br />
-          If your pipeline is broken, your pods are crashlooping, or you just need someone who actually reads the logs — I'm your person.
+          Open to DevOps, fullstack, and backend roles — freelance or full-time.<br /><br />
+          Whether your pipeline is broken, your pods are crashlooping, or you need someone to build and ship a product end-to-end — I'm your person.
         </p>
         <!-- Status badge -->
         <div class="inline-flex items-center gap-2 font-mono text-xs border border-green-900 text-green-400 px-3 py-1.5 rounded-lg glass-card">
